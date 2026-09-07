@@ -51,7 +51,17 @@ For each non-trivial node in the plan:
 3. Connect it explicitly to prior nodes.
 4. Run one short check. If it does not land, repair this node before building on it.
 
-Use `$...$` for inline mathematics and `$$...$$` for displayed mathematics. Keep notation defined and connect each symbol to the concept it represents.
+## Mathematics formatting
+
+Do not use `$...$` for inline mathematics: in the Codex app it may be displayed literally. For a variable named in a sentence, use plain text or backticks, such as `y` or `w`. For an expression, equation, or notation that benefits from typesetting, use a display block with `$$` delimiters on their own lines:
+
+```markdown
+$$
+\mathbf{w}^{\mathsf{T}}\mathbf{x} + 1
+$$
+```
+
+Keep notation defined and connect each symbol to the concept it represents.
 
 ## Visuals and records
 

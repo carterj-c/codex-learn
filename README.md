@@ -20,7 +20,7 @@ The teacher will check the prerequisites that matter, propose a small lesson map
 
 ## Personalize the teacher
 
-Edit [`teach/SKILL.md`](.codex/skills/teach/SKILL.md) and start with **Customize This Skill First**. That section is the intended control panel for pace, depth, favorite examples, feedback tone, and low-energy behavior. Leave the remainder in place unless you deliberately want to change the learning method.
+Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md) and start with **Customize This Skill First**. That section is the intended control panel for pace, depth, favorite examples, feedback tone, and low-energy behavior. Leave the remainder in place unless you deliberately want to change the learning method.
 
 ## What changed from the reference
 
@@ -28,7 +28,7 @@ Edit [`teach/SKILL.md`](.codex/skills/teach/SKILL.md) and start with **Customize
 - Popup questions and quizzes become ordinary chat prompts with immediate, explicit feedback.
 - The Markdown log becomes optional lesson files in [`lessons/`](lessons/).
 - A researcher subagent becomes focused Codex web research when accuracy needs evidence.
-- Mermaid/SVG maker agents and Obsidian embeds become `$lesson-visuals`, Mermaid, LaTeX, and Codex-rendered artifacts.
+- Mermaid/SVG maker agents and Obsidian embeds become `$lesson-visuals`, Mermaid, display-LaTeX blocks, and Codex-rendered artifacts.
 
 Run `bash tests/validate-learning-skills.sh` to verify the workspace contract after editing the skills.
 

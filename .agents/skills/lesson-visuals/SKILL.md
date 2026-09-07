@@ -10,7 +10,7 @@ Create one minimal, correct visual that carries information prose or a single eq
 ## Choose the smallest fitting format
 
 - Use Mermaid for dependencies, flows, sequences, state changes, trees, and component relationships. Keep labels short and use no more nodes than the idea needs.
-- Use LaTeX for mathematical notation and derivations. A diagram does not replace a clear equation when the relationship is algebraic.
+- Use display LaTeX blocks for mathematical notation and derivations. Do not use `$...$` inline delimiters; the Codex app can display them literally.
 - Use a simple table when a direct comparison is the point.
 - Use Codex image generation or a rendered SVG only for a spatial or geometric relationship that Mermaid cannot express faithfully, such as coordinates, vectors, shape, physical layout, or a plot.
 

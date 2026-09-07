@@ -2,10 +2,10 @@
 
 set -euo pipefail
 
-teach_skill=.codex/skills/teach/SKILL.md
-visuals_skill=.codex/skills/lesson-visuals/SKILL.md
-curriculum_skill=.codex/skills/curriculum/SKILL.md
-ml_math_skill=.codex/skills/ml-mathematics/SKILL.md
+teach_skill=.agents/skills/teach/SKILL.md
+visuals_skill=.agents/skills/lesson-visuals/SKILL.md
+curriculum_skill=.agents/skills/curriculum/SKILL.md
+ml_math_skill=.agents/skills/ml-mathematics/SKILL.md
 
 test -f "$teach_skill"
 test -f "$visuals_skill"
@@ -29,12 +29,18 @@ grep -q '\$teach' README.md
 grep -q 'does not replace' curricula/ml-mathematics/subject-curriculum.md
 grep -q 'Observed evidence' curricula/ml-mathematics/progress.md
 grep -q 'When a curriculum is active' "$teach_skill"
+grep -q 'Do not use `\$...\$`' "$teach_skill"
 grep -q '^model = "gpt-5.6-sol"$' .codex/config.toml
 grep -q '^model_reasoning_effort = "high"$' .codex/config.toml
 grep -q '^default_subagent_model = "gpt-5.6-terra"$' .codex/config.toml
 grep -q '^default_subagent_reasoning_effort = "medium"$' .codex/config.toml
 
-if rg -q 'ask_user_question|md-log|Obsidian wikilink|pi-interactive-subagents' .codex/skills; then
+if rg -q 'ask_user_question|md-log|Obsidian wikilink|pi-interactive-subagents' .agents/skills; then
   echo 'Pi-specific wording remains in Codex skills.' >&2
+  exit 1
+fi
+
+if test -e .codex/skills; then
+  echo 'Skills must live under .agents/skills, not .codex/skills.' >&2
   exit 1
 fi
