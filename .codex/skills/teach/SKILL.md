@@ -1,0 +1,60 @@
+---
+name: teach
+description: Use when the user wants to learn or deeply understand a topic through a personalized, evidence-aware lesson rather than receive a one-shot explanation.
+---
+
+# Teach for understanding
+
+Help the learner build a small connected model they can derive from, not a pile of facts to memorize. Use this workflow for a full lesson or scale it down for a short explanation.
+
+## Customize This Skill First
+
+This section is intentionally yours to edit. Keep the rest as the teaching engine.
+
+- **Default pace:** Ask one question or establish one meaningful idea at a time.
+- **Default depth:** Explain the mechanism, then use one concrete example.
+- **Examples I enjoy:** Replace this with domains, analogies, or projects that make ideas feel familiar.
+- **Feedback style:** Be candid, specific, and kind. Say what is right, what needs correction, and why.
+- **When I am low energy:** Prefer a concise expository explanation before asking a check question.
+
+## Teaching principles
+
+1. **Start from secure ground.** Find a few simple truths or real definitions the learner can safely accept. Do not present a caveated claim as a foundation.
+2. **Make each step discoverable.** Introduce every new idea by the problem it solves or the observation that motivates it. Explain why someone would reach for this step.
+3. **Make the connection explicit.** State what established idea the new idea depends on; do not let a fact appear from nowhere.
+4. **Verify important claims.** Use web research before teaching claims that are uncertain, time-sensitive, disputed, or foundational. Correct the record openly if research changes the lesson.
+
+## Session protocol
+
+### 1. Probe
+
+- Ask what outcome the learner wants: what they want to be able to explain, decide, build, or calculate.
+- Locate the relevant edge of their knowledge with short, gradable questions. Test prerequisites actually needed for the goal, not a broad survey of the field.
+- A correct answer establishes a floor, not mastery. Increase difficulty or test an adjacent prerequisite until the useful boundary is clear.
+- Treat a wrong answer as diagnostic: distinguish a slip from a missing link or a stable misconception before teaching over it.
+- Use ordinary chat for both preference questions and graded checks. Label a check clearly, then give immediate feedback: result, correct reasoning, and what it changes in the lesson.
+
+### 2. Plan
+
+- Research the topic only where the evidence rule requires it.
+- Identify the smallest dependency chain from what the learner already knows to the requested outcome.
+- Choose Socratic discovery when the learner can plausibly reason to the next step; otherwise explain the discovery path directly.
+- Present a short plan before teaching: the destination, the order, and why that order fits their current level.
+- Include a small Mermaid dependency graph when the relationship is genuinely clearer than a list. Wait for the learner's approval before a substantial lesson.
+
+### 3. Teach
+
+For each non-trivial node in the plan:
+
+1. Motivate the gap or problem it resolves.
+2. Establish the idea from a secure foundation or a discoverable step.
+3. Connect it explicitly to prior nodes.
+4. Run one short check. If it does not land, repair this node before building on it.
+
+Use `$...$` for inline mathematics and `$$...$$` for displayed mathematics. Keep notation defined and connect each symbol to the concept it represents.
+
+## Visuals and records
+
+- Invoke `$lesson-visuals` only when a relationship, process, geometry, or comparison is materially clearer as a picture.
+- If the learner wants durable notes, create or update `lessons/<topic-slug>.md` using the format in `lessons/README.md`. Do not create a lesson file merely because a casual question was asked.
+- End a completed lesson with the learner's current model, corrections made, and the next useful frontier.
