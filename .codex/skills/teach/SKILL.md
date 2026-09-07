@@ -58,3 +58,7 @@ Use `$...$` for inline mathematics and `$$...$$` for displayed mathematics. Keep
 - Invoke `$lesson-visuals` only when a relationship, process, geometry, or comparison is materially clearer as a picture.
 - If the learner wants durable notes, create or update `lessons/<topic-slug>.md` using the format in `lessons/README.md`. Do not create a lesson file merely because a casual question was asked.
 - End a completed lesson with the learner's current model, corrections made, and the next useful frontier.
+
+## Optional curriculum context
+
+When a curriculum is active, use `$curriculum` to load its subject policy and evidence ledger before probing. Treat that context as a scope modifier: it selects relevant prerequisites, identifies stale or partial knowledge, and can require subject-specific checks. It never replaces this skill's core probe → plan → teach process.

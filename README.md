@@ -31,3 +31,17 @@ Edit [`teach/SKILL.md`](.codex/skills/teach/SKILL.md) and start with **Customize
 - Mermaid/SVG maker agents and Obsidian embeds become `$lesson-visuals`, Mermaid, LaTeX, and Codex-rendered artifacts.
 
 Run `bash tests/validate-learning-skills.sh` to verify the workspace contract after editing the skills.
+
+## Long-running ML mathematics curriculum
+
+For an adaptive learning arc that persists across Codex tasks, say:
+
+```text
+Use $ml-mathematics to continue my ML mathematics curriculum. My current goal is <goal>.
+```
+
+The subject policy, adaptive roadmap, and evidence ledger live in [`curricula/ml-mathematics/`](curricula/ml-mathematics/). Edit `subject-curriculum.md` to tune this field's teaching style; `progress.md` is updated only from demonstrated learning evidence. The generic `$teach` skill stays available for unrelated subjects.
+
+## Model routing
+
+The project configuration uses `gpt-5.6-sol` with high reasoning for the learner-facing teacher, and defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning. These defaults apply when opening a new Codex task in this project; an already-running task keeps its selected model.
