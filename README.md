@@ -25,7 +25,7 @@ Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md) and start with **Customiz
 ## What changed from the reference
 
 - Pi's skill becomes a project-local Codex skill.
-- Popup questions and quizzes become ordinary chat prompts with immediate, explicit feedback.
+- Everyday checks remain ordinary chat prompts with immediate, explicit feedback. A curriculum can optionally permit an on-request local interactive exercise through `$interactive-assessment`.
 - The Markdown log becomes optional lesson files in [`lessons/`](lessons/).
 - A researcher subagent becomes focused Codex web research when accuracy needs evidence.
 - Mermaid/SVG maker agents and Obsidian embeds become `$lesson-visuals`, Mermaid, display-LaTeX blocks, and Codex-rendered artifacts.
@@ -41,6 +41,14 @@ Use $ml-mathematics to continue my ML mathematics curriculum. My current goal is
 ```
 
 The subject policy, adaptive roadmap, and evidence ledger live in [`curricula/ml-mathematics/`](curricula/ml-mathematics/). Edit `subject-curriculum.md` to tune this field's teaching style; `progress.md` is updated only from demonstrated learning evidence. The generic `$teach` skill stays available for unrelated subjects.
+
+To request an interactive ML mathematics drill, say:
+
+```text
+Use $interactive-assessment for a short exercise on matrix dimensions.
+```
+
+The ML mathematics curriculum enables that skill only on request. Other curricula stay chat-only unless their own `subject-curriculum.md` opts in with an `interactive_assessment` block.
 
 ## Model routing
 

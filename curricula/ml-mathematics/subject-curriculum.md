@@ -41,6 +41,24 @@ For an important new symbol or expression, explain its spoken name, operation, m
 
 Use visuals when they materially improve a vector, transformation, surface, gradient, distribution, optimization, or decision-boundary explanation. Use `$lesson-visuals`; avoid decoration.
 
+## Optional interactive assessments
+
+This curriculum permits local interactive assessments only when the learner asks for one. It does not make them the default probe or lesson format.
+
+```yaml
+interactive_assessment:
+  mode: on-request
+  allowed_formats:
+    - multiple-choice
+    - matching
+    - ordering
+    - visual
+  max_questions: 8
+  save_results: evidence-only
+```
+
+Use these exercises when interaction reveals something a normal chat answer would not, such as matching matrix shapes to operations, ordering a derivation, or manipulating a geometric relationship. Keep proofs, equation-reading explanations, and open-ended diagnostic responses in chat.
+
 ## Progression rules
 
 - Move forward when the next dependency is usable, not only at perfect mastery.

@@ -27,6 +27,16 @@ Use the curriculum context to focus `$teach`'s normal probe:
 - Do not treat an unverified baseline assumption as proof of mastery.
 - Do not skip the generic teacher's foundation confirmation, error diagnosis, plan approval, or per-node checks.
 
+## Optional interactive assessments
+
+The active subject may include an `interactive_assessment` block in `subject-curriculum.md`. Treat it as a subject-scoped permission, not as a replacement for chat-based probing.
+
+- With `mode: off`, use ordinary chat checks only.
+- With `mode: on-request`, use `$interactive-assessment` only after the learner explicitly asks for an interactive quiz, drill, or exercise.
+- With `mode: auto`, the teacher may propose a local exercise when interaction would provide better evidence than a short chat check.
+
+If the block is absent, behave as `off`. Record completed exercise evidence using the same standards as any other observed assessment.
+
 ## Maintain evidence, not impressions
 
 Update `progress.md` only after observed evidence: a diagnostic response, a learner explanation, a completed applied task, or an explicit correction. For each material update, record the concept, status, evidence, date, and next action.
