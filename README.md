@@ -1,6 +1,6 @@
 # Codex learning workspace
 
-This project adapts the teaching method from [amosblomqvist/learn](https://github.com/amosblomqvist/learn) to Codex. It keeps the important part—the personalized probe → plan → teach loop—and removes the Pi extensions, Obsidian requirement, tmux subagent runtime, and separate visual-rendering setup.
+This project adapts the teaching method from [amosblomqvist/learn](https://github.com/amosblomqvist/learn) to Codex. Its curriculum, lesson, and artifact conventions are harness-neutral; the checked-in skill discovery and model-routing adapters target Codex. It keeps the important part—the personalized probe → plan → teach loop—and removes the Pi extensions, Obsidian requirement, tmux subagent runtime, and separate visual-rendering setup.
 
 ## Origin and license
 
@@ -49,7 +49,7 @@ Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md) and start with **Customiz
 - Everyday checks remain ordinary chat prompts with immediate, explicit feedback. A curriculum can optionally permit an on-request local interactive exercise through `$interactive-assessment`.
 - Curriculum lessons become compact, retrievable records in [`lessons/`](lessons/), with a per-subject index and separate artifact directories.
 - A researcher subagent becomes focused Codex web research when accuracy needs evidence.
-- `$lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful, then opens them in Codex's side panel; tables remain comparisons, not visual fallbacks.
+- `$lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful, then presents them through the available harness browser or viewer; tables remain comparisons, not visual fallbacks.
 
 Run `bash tests/validate-learning-skills.sh` to verify the workspace contract after editing the skills.
 
