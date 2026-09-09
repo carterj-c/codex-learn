@@ -3,27 +3,37 @@ name: lesson-visuals
 description: Use when a lesson contains a relationship, flow, comparison, or spatial idea that the learner would understand materially better as a visual.
 ---
 
-# Lesson visuals
+# Lesson visual artifacts
 
-Create one minimal, correct visual that carries information prose or a single equation cannot carry. A visual is optional: omit it when words are clearer.
+Create one minimal, correct visual artifact that carries information prose or a single equation cannot carry. A visual is optional: omit it when words are clearer. A table can present data, but it is not a substitute for a requested picture, diagram, or spatial explanation.
 
-## Choose the smallest fitting format
+## Persist the artifact separately
 
-- Use Mermaid for dependencies, flows, sequences, state changes, trees, and component relationships. Keep labels short and use no more nodes than the idea needs.
-- Use display LaTeX blocks for mathematical notation and derivations. Do not use `$...$` inline delimiters; the Codex app can display them literally.
-- Use a simple table when a direct comparison is the point.
-- Use Codex image generation or a rendered SVG only for a spatial or geometric relationship that Mermaid cannot express faithfully, such as coordinates, vectors, shape, physical layout, or a plot.
+For an active curriculum, save a reusable visual under:
+
+```text
+lessons/<subject>/artifacts/<yyyy-mm-dd>-<topic-slug>/
+```
+
+Link the file from the corresponding lesson record and `lessons/<subject>/index.md`. The lesson Markdown is the explanation and retrieval record; it should not be coerced into being the visual itself. For a one-off lesson, retain an artifact only when the learner asks for durable notes.
+
+## Choose the smallest fitting artifact
+
+- Use a rendered SVG or PNG for a diagram, spatial relationship, geometric interpretation, coordinate system, vector, transformation, plot, or other visual layout.
+- Use a self-contained local HTML/CSS/JavaScript page when controlled interaction materially improves understanding—for example adjusting a vector, inspecting a transformation, or stepping through an algorithm. Include no external dependencies and make the HTML usable from a local server in Codex's Browser.
+- A Mermaid source file is acceptable only when paired with its rendered SVG; do not use an inline Mermaid block as the durable visual.
+- Use a table only when direct comparison is the actual teaching goal. Never produce a table merely because a rendered visual would take more work.
+- Keep equations and derivations in the lesson Markdown when typeset notation is what the learner needs; do not call that a visual artifact.
 
 ## Brief and verify
 
 Before creating a visual, state the single relationship it must show. Remove every element that is not essential to that relationship.
 
-- For a Mermaid diagram, write a fenced `mermaid` block directly in the lesson. Read its edges and labels for factual direction before sending it.
-- For a rendered visual, inspect the produced artifact before presenting it. Fix illegible labels, missing arrows, false spatial claims, and unnecessary decoration.
-- Present the visual next to the teaching step it supports. Give it one sentence of context; do not repeat every label in prose.
+- Inspect the rendered artifact before presenting it. Fix illegible labels, missing arrows, false spatial claims, non-working interaction, and unnecessary decoration.
+- Present the artifact with one sentence of context, then link it from the lesson record. Do not repeat every label in prose.
 
 ## Limits
 
 - Never use a visual as decoration or as a substitute for evidence.
 - Never draw a complex system merely because the topic is complex; split the explanation into separate visuals when needed.
-- If you cannot make a correct visual, use prose and say what the visual would have been intended to clarify.
+- If you cannot make a correct visual, use prose and say what the visual would have been intended to clarify; do not silently replace it with a table.

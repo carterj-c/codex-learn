@@ -47,9 +47,9 @@ Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md) and start with **Customiz
 
 - Pi's skill becomes a project-local Codex skill.
 - Everyday checks remain ordinary chat prompts with immediate, explicit feedback. A curriculum can optionally permit an on-request local interactive exercise through `$interactive-assessment`.
-- The Markdown log becomes optional lesson files in [`lessons/`](lessons/).
+- Curriculum lessons become compact, retrievable records in [`lessons/`](lessons/), with a per-subject index and separate artifact directories.
 - A researcher subagent becomes focused Codex web research when accuracy needs evidence.
-- Mermaid/SVG maker agents and Obsidian embeds become `$lesson-visuals`, Mermaid, display-LaTeX blocks, and Codex-rendered artifacts.
+- `$lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful; tables remain comparisons, not visual fallbacks.
 
 Run `bash tests/validate-learning-skills.sh` to verify the workspace contract after editing the skills.
 
@@ -70,6 +70,8 @@ Use $interactive-assessment for a short exercise on matrix dimensions.
 ```
 
 The ML mathematics curriculum enables that skill only on request. Other curricula stay chat-only unless their own `subject-curriculum.md` opts in with an `interactive_assessment` block.
+
+Meaningful curriculum lessons are stored as compact records, not raw transcripts. Their rendered diagrams, images, and reusable local HTML live beside the relevant lesson under `lessons/<subject>/artifacts/`, where later lessons can retrieve them through the subject index.
 
 ## Model routing
 

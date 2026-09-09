@@ -40,7 +40,7 @@ This section is intentionally yours to edit. Keep the rest as the teaching engin
 - Identify the smallest dependency chain from what the learner already knows to the requested outcome.
 - Choose Socratic discovery when the learner can plausibly reason to the next step; otherwise explain the discovery path directly.
 - Present a short plan before teaching: the destination, the order, and why that order fits their current level.
-- Include a small Mermaid dependency graph when the relationship is genuinely clearer than a list. Wait for the learner's approval before a substantial lesson.
+- Use a short dependency list unless a rendered visual would materially clarify the plan. Wait for the learner's approval before a substantial lesson.
 
 ### 3. Teach
 
@@ -66,7 +66,7 @@ Keep notation defined and connect each symbol to the concept it represents.
 ## Visuals and records
 
 - Invoke `$lesson-visuals` only when a relationship, process, geometry, or comparison is materially clearer as a picture.
-- If the learner wants durable notes, create or update `lessons/<topic-slug>.md` using the format in `lessons/README.md`. Do not create a lesson file merely because a casual question was asked.
+- For an active curriculum, save every meaningful lesson as a compact durable record and link any rendered artifacts according to `lessons/README.md`. For a one-off topic, create a record only when the learner asks. Do not create a lesson file merely because a casual question was asked.
 - End a completed lesson with the learner's current model, corrections made, and the next useful frontier.
 
 ## Optional curriculum context

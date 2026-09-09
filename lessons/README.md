@@ -1,6 +1,18 @@
-# Lessons
+# Lesson records and artifacts
 
-Create one Markdown file per durable lesson, using a lowercase hyphenated topic name such as `transformer-attention.md`. A lesson note is a compact record of understanding, not a transcript.
+For a curriculum, create one Markdown file per meaningful lesson at `lessons/<subject>/<yyyy-mm-dd>-<topic-slug>.md`. Keep `lessons/<subject>/index.md` as the retrieval map. A lesson note is a compact record of understanding, not a transcript.
+
+Put rendered visuals, images, and reusable local HTML in `lessons/<subject>/artifacts/<yyyy-mm-dd>-<topic-slug>/`. Link them from the lesson and index; do not force the note itself to be a diagram, a table, or an embedded visual.
+
+## Subject index
+
+```markdown
+# <Subject> lesson index
+
+| Date | Lesson | Outcome | Evidence / next frontier | Artifacts |
+| --- | --- | --- | --- | --- |
+| 2026-09-09 | [Matrix-vector products](2026-09-09-matrix-vector-products.md) | Infer output shapes | Recheck transpose notation | [diagram](artifacts/2026-09-09-matrix-vector-products/shapes.svg) |
+```
 
 ## Lesson Record
 
@@ -15,10 +27,6 @@ Create one Markdown file per durable lesson, using a lowercase hyphenated topic 
 
 - <Secure fact or definition>
 
-## Dependency map
-
-<A small Mermaid diagram or a short dependency list when helpful.>
-
 ## What I now understand
 
 - <A connected explanation in my own words.>
@@ -31,7 +39,11 @@ Create one Markdown file per durable lesson, using a lowercase hyphenated topic 
 
 - <The next concept that follows naturally from this one.>
 
-## Sources and artifacts
+## Related artifacts
 
-- <Sources used to verify key claims, plus local diagrams if any.>
+- [<Diagram or local HTML>](artifacts/<yyyy-mm-dd>-<topic-slug>/<filename>) — <what it clarifies>
+
+## Sources
+
+- <Sources used to verify key claims.>
 ```

@@ -13,8 +13,9 @@ When the user names a curriculum or uses a subject entry skill:
 
 1. Read `curricula/<subject>/subject-curriculum.md` for the subject's objectives, probe modifiers, and progression rules.
 2. Read `curricula/<subject>/progress.md` for demonstrated knowledge, current gaps, stale knowledge, and revisit flags.
-3. Read `curricula/<subject>/curriculum-map.md` only when selecting a next unit or checking prerequisite paths.
-4. Build a compact context packet for the current lesson: learner outcome, relevant dependency strand, existing evidence, subject-specific probe modifiers, and likely next nodes.
+3. Read `lessons/<subject>/index.md` when it exists to locate relevant earlier explanations and artifacts. Do not load every lesson note.
+4. Read `curricula/<subject>/curriculum-map.md` only when selecting a next unit or checking prerequisite paths.
+5. Build a compact context packet for the current lesson: learner outcome, relevant dependency strand, existing evidence, subject-specific probe modifiers, and likely next nodes.
 
 Do not load a subject curriculum for an unrelated one-off teaching request.
 
@@ -49,7 +50,7 @@ Use these statuses consistently:
 - **unassessed** — no usable evidence yet.
 - **revisit** — progress can continue, but this concept needs scheduled reinforcement.
 
-Keep the ledger compact. Put detailed explanations and diagrams in `lessons/<subject>/` files, linking them from the ledger when useful.
+Keep the ledger compact. After a meaningful curriculum lesson, create or update one concise record at `lessons/<subject>/<yyyy-mm-dd>-<topic>.md` and add it to `lessons/<subject>/index.md`. Record the outcome, durable explanation, corrections, and next frontier—not a raw chat transcript. Store rendered diagrams, images, and reusable local HTML under `lessons/<subject>/artifacts/<yyyy-mm-dd>-<topic-slug>/`, and link them from the lesson record and index when useful.
 
 ## Select the next unit
 

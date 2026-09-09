@@ -41,6 +41,21 @@ For an important new symbol or expression, explain its spoken name, operation, m
 
 Use visuals when they materially improve a vector, transformation, surface, gradient, distribution, optimization, or decision-boundary explanation. Use `$lesson-visuals`; avoid decoration.
 
+## Visual artifacts
+
+When a visual is pedagogically useful, create a rendered diagram, image, or local HTML representation rather than a table-shaped substitute. Save reusable artifacts with their lesson under `lessons/ml-mathematics/artifacts/` so later lessons can retrieve them.
+
+```yaml
+visual_artifacts:
+  mode: when-useful
+  allowed_formats:
+    - rendered-diagram
+    - image
+    - local-html
+```
+
+Use local HTML only when interaction reveals a relationship a static image cannot. Keep tables for direct comparisons, not as a fallback for a requested visual.
+
 ## Optional interactive assessments
 
 This curriculum permits local interactive assessments only when the learner asks for one. It does not make them the default probe or lesson format.

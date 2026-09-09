@@ -26,15 +26,19 @@ grep -q '^name: curriculum$' "$curriculum_skill"
 grep -q '^name: ml-mathematics$' "$ml_math_skill"
 grep -q '^name: interactive-assessment$' "$interactive_assessment_skill"
 grep -q '^## Customize This Skill First$' "$teach_skill"
-grep -q 'Use Mermaid' "$visuals_skill"
+grep -q 'rendered SVG or PNG' "$visuals_skill"
+grep -q 'local HTML/CSS/JavaScript' "$visuals_skill"
 grep -q '^## Lesson Record$' lessons/README.md
+grep -q '^## Subject index$' lessons/README.md
 grep -q '\$teach' README.md
 grep -q 'does not replace' curricula/ml-mathematics/subject-curriculum.md
 grep -q 'Observed evidence' curricula/ml-mathematics/progress.md
 grep -q 'When a curriculum is active' "$teach_skill"
 grep -q 'Optional interactive assessments' "$curriculum_skill"
 grep -q 'mode: on-request' curricula/ml-mathematics/subject-curriculum.md
+grep -q 'visual_artifacts:' curricula/ml-mathematics/subject-curriculum.md
 grep -q 'local interactive exercise' "$interactive_assessment_skill"
+grep -q 'lessons/<subject>/artifacts' "$curriculum_skill"
 grep -q 'Do not use `\$...\$`' "$teach_skill"
 grep -q '^model = "gpt-5.6-sol"$' .codex/config.toml
 grep -q '^model_reasoning_effort = "high"$' .codex/config.toml
