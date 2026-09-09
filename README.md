@@ -73,6 +73,17 @@ The ML mathematics curriculum enables that skill only on request. Other curricul
 
 Meaningful curriculum lessons are stored as compact records, not raw transcripts. Their rendered diagrams, images, and reusable local HTML live beside the relevant lesson under `lessons/<subject>/artifacts/`, where later lessons can retrieve them through the subject index.
 
+## Design a new curriculum
+
+To design a curriculum without starting a lesson, open a normal project task and say:
+
+```text
+Use $curriculum-designer to draft a curriculum for <subject>.
+My intended outcome is <capability>.
+```
+
+This dispatches the dedicated `curriculum-designer` subagent on `gpt-5.6-terra` with medium reasoning. It returns a reviewable curriculum draft; it does not invoke the teacher, probe the learner, or write active curriculum files until you explicitly approve it.
+
 ## Model routing
 
-The project configuration uses `gpt-5.6-sol` with high reasoning for the learner-facing teacher, and defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning. These defaults apply when opening a new Codex task in this project; an already-running task keeps its selected model.
+The project configuration uses `gpt-5.6-sol` with high reasoning for the learner-facing teacher, defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning, and pins the `curriculum-designer` role to that same Terra/medium configuration. These defaults apply when opening a new Codex task in this project; an already-running task keeps its selected model.
