@@ -28,6 +28,7 @@ grep -q '^name: interactive-assessment$' "$interactive_assessment_skill"
 grep -q '^## Customize This Skill First$' "$teach_skill"
 grep -q 'rendered SVG or PNG' "$visuals_skill"
 grep -q 'local HTML/CSS/JavaScript' "$visuals_skill"
+grep -q "right side panel" "$visuals_skill"
 grep -q '^## Lesson Record$' lessons/README.md
 grep -q '^## Subject index$' lessons/README.md
 grep -q '\$teach' README.md

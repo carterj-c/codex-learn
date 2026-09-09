@@ -32,7 +32,7 @@ Keep a first exercise to 3–8 questions. Avoid gamification, accounts, analytic
 
 1. State the targeted concept and the evidence the exercise can provide.
 2. For an active curriculum, create one self-contained HTML/CSS/JavaScript file under `lessons/<subject>/artifacts/<yyyy-mm-dd>-<topic-slug>/`; otherwise use a temporary directory. Include clear instructions, keyboard-accessible controls, a submit/reset flow, immediate item-level feedback, and a compact final result summary.
-3. Serve the exercise directory on localhost and open it in Codex's Browser. Let the learner interact with it; do not answer items for them.
+3. Serve the exercise directory on localhost and open it in the current Codex task's right-side Browser panel. Let the learner interact with it; do not answer items for them.
 4. Read or ask the learner to paste the final summary. Give feedback in chat, including the reasoning behind any missed item.
 5. Retain a curriculum exercise as a reusable artifact and link it from the lesson record; delete a temporary exercise when it is no longer needed unless the learner asks to retain it.
 

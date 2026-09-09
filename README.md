@@ -49,7 +49,7 @@ Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md) and start with **Customiz
 - Everyday checks remain ordinary chat prompts with immediate, explicit feedback. A curriculum can optionally permit an on-request local interactive exercise through `$interactive-assessment`.
 - Curriculum lessons become compact, retrievable records in [`lessons/`](lessons/), with a per-subject index and separate artifact directories.
 - A researcher subagent becomes focused Codex web research when accuracy needs evidence.
-- `$lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful; tables remain comparisons, not visual fallbacks.
+- `$lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful, then opens them in Codex's side panel; tables remain comparisons, not visual fallbacks.
 
 Run `bash tests/validate-learning-skills.sh` to verify the workspace contract after editing the skills.
 
