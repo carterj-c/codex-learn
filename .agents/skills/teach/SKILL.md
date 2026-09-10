@@ -22,7 +22,7 @@ This section is intentionally yours to edit. Keep the rest as the teaching engin
 1. **Start from secure ground.** Find a few simple truths or real definitions the learner can safely accept. Do not present a caveated claim as a foundation.
 2. **Make each step discoverable.** Introduce every new idea by the problem it solves or the observation that motivates it. Explain why someone would reach for this step.
 3. **Make the connection explicit.** State what established idea the new idea depends on; do not let a fact appear from nowhere.
-4. **Verify important claims.** When an active curriculum has relevant sources, use the `lesson-researcher` subagent to confirm uncertain, time-sensitive, disputed, foundational, or source-dependent claims before teaching them. Otherwise use web research as needed. Correct the record openly if research changes the lesson.
+4. **Verify important claims.** Follow the active curriculum's `verification` policy. It may require the named `lesson-researcher` for uncertain, time-sensitive, disputed, foundational, or source-dependent claims. Otherwise use web research as needed. Correct the record openly if research changes the lesson.
 
 ## Session protocol
 
@@ -36,13 +36,31 @@ This section is intentionally yours to edit. Keep the rest as the teaching engin
 
 ### 2. Plan
 
-- Research the topic only where the evidence rule requires it. Give the `lesson-researcher` the relevant curriculum source IDs and the exact claims to verify; do not ask it to teach.
+- Identify candidate claims that may need verification, but do not dispatch research for the teaching horizon until the learner approves the route. Research only what is necessary to make the plan itself accurate.
 - Identify the smallest dependency chain from what the learner already knows to the requested outcome.
 - Choose Socratic discovery when the learner can plausibly reason to the next step; otherwise explain the discovery path directly.
 - Present a short plan before teaching: the destination, the order, and why that order fits their current level.
 - Use a short dependency list unless a rendered visual would materially clarify the plan. Wait for the learner's approval before a substantial lesson.
 
-### 3. Teach
+### 3. Verify the teaching horizon
+
+After the learner approves the plan and before new factual lesson content, privately outline the exact material claims for a small coherent teaching horizon. The research batch may cover several bite-sized teach/check turns; it is not a promise to send all of that material in one response.
+
+Apply the active curriculum's verification mode:
+
+- **off** — research is optional. Do not create a verification burden for pure derivation, arithmetic, or other self-contained reasoning.
+- **adaptive** — verify claims the subject policy marks as required, plus claims that are uncertain, time-sensitive, disputed, foundational, or source-dependent. This is the safe default for factual or source-dependent curricula when no mode is specified.
+- **strict** — verify every material factual claim. Before sending each factual response, map every such claim to a packet claim ID. Send disputed or high-stakes material to the researcher for an after-draft check before teaching it.
+
+For claims that need verification, invoke the named `lesson-researcher` with the subject, exact claims, horizon, relevant source IDs, and explicit out-of-scope boundaries. Ask it to return a compact packet; do not ask it to teach or write files. Wait for the first packet before introducing its factual content. Persist the returned packet under `curricula/<subject>/verification/` using the naming and indexing contract in that directory. A claim is usable only when its meaning and context still match a supported packet claim and its source version or fingerprint still matches. For time-sensitive claims, also check the packet's freshness or recheck trigger.
+
+Before each factual response, perform a claim-coverage check. Where verification applies, teach only supported claims in the current packet, safely qualified where needed; otherwise ensure the claim is self-contained or already securely established. Do not add an unsupported factual bridge. Be candid that verification improves trust but is not infallible.
+
+When the remaining packet buffer is nearly exhausted and the next node is predictable, reuse the same researcher thread to refill the next horizon in the background when the harness supports background subagents. You may ask or grade checks while it runs, but do not advance into new factual content until its packet is ready. Once it completes, persist its result before relying on it. If background work is unavailable, refill synchronously. Never run competing researchers for one lesson.
+
+If the learner changes direction, stop relying on packets outside the new scope. Keep still-valid packets indexed for later reuse, then verify the new horizon.
+
+### 4. Teach
 
 For each non-trivial node in the plan:
 

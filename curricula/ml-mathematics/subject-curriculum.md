@@ -74,6 +74,33 @@ interactive_assessment:
 
 Use these exercises when interaction reveals something a normal chat answer would not, such as matching matrix shapes to operations, ordering a derivation, or manipulating a geometric relationship. Keep proofs, equation-reading explanations, and open-ended diagnostic responses in chat.
 
+## Verification policy
+
+Use adaptive verification for factual lesson content. Before teaching a small coherent horizon, use the `lesson-researcher` packet flow defined by `$teach` for these required claim classes:
+
+- source-dependent terminology, notation, scope, or stated facts;
+- foundational mathematical claims when they are being introduced as facts rather than shown;
+- empirical, historical, unfamiliar-application, uncertain, or disputed claims.
+
+The following are exempt when they stay within already-supported context: arithmetic; a derivation shown step by step; feedback on a learner answer; and logical consequences already established in scope. A proof or derivation does not make its unshown premises verified. Recheck time-sensitive or source-version-dependent claims when their packet says to do so.
+
+```yaml
+verification:
+  mode: adaptive
+  required_claim_classes:
+    - source-dependent
+    - foundational
+    - empirical
+    - historical
+    - unfamiliar-application
+    - uncertain-or-disputed
+  exempt_claim_classes:
+    - arithmetic
+    - shown-derivations
+    - learner-answer-feedback
+    - already-supported-in-scope-logical-consequences
+```
+
 ## Progression rules
 
 - Move forward when the next dependency is usable, not only at perfect mastery.

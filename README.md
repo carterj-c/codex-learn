@@ -37,7 +37,7 @@ For example:
 Use $teach to help me learn how transformers perform attention. My intended outcome is to derive the attention calculation and understand why queries, keys, and values are separate.
 ```
 
-The teacher will check the prerequisites that matter, propose a small lesson map, teach one connection at a time, and use research or a visual only when it earns its place.
+The teacher will check the prerequisites that matter, propose a small lesson map, wait for your approval, then teach one connection at a time with a short check. When the curriculum requires verification, it prepares a small private claim horizon, waits for a research packet, and uses that packet across several small turns rather than making one oversized response.
 
 ## Personalize the teacher
 
@@ -48,7 +48,7 @@ Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md) and start with **Customiz
 - Pi's skill becomes a project-local Codex skill.
 - Everyday checks remain ordinary chat prompts with immediate, explicit feedback. A curriculum can optionally permit an on-request local interactive exercise through `$interactive-assessment`.
 - Curriculum lessons become compact, retrievable records in [`lessons/`](lessons/), with a per-subject index and separate artifact directories.
-- A researcher subagent becomes focused Codex web research when accuracy needs evidence.
+- A researcher subagent produces compact, reusable claim-verification packets when the subject policy requires evidence.
 - `$lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful, then presents them through the available harness browser or viewer; tables remain comparisons, not visual fallbacks.
 
 Run `bash tests/validate-learning-skills.sh` to verify the workspace contract after editing the skills.
@@ -100,3 +100,18 @@ The resulting `sources/catalog.md` is the retrieval index for the curriculum des
 ## Model routing
 
 The project configuration uses `gpt-5.6-sol` with high reasoning for the learner-facing teacher, defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning, and pins the `curriculum-designer` and `lesson-researcher` roles to that same Terra/medium configuration. These defaults apply when opening a new Codex task in this project; an already-running task keeps its selected model.
+
+## Learning components
+
+| Component | Kind | Intended use | Invoke it with | Persistent location |
+| --- | --- | --- | --- | --- |
+| Teacher | Agent (Sol/high main task) | Probe, plan, teach, and check a learner's understanding | `Use $teach to help me learn <topic>.` | Meaningful curriculum lessons: `lessons/<subject>/` |
+| Curriculum overlay | Skill | Loads a subject policy, evidence, sources, and route | `Use $curriculum with $teach for <subject>.` | `curricula/<subject>/` |
+| Subject entry skill | Skill | Starts or continues a subject-specific arc | `Use $ml-mathematics to continue my ML mathematics curriculum.` | That subject's curriculum and lessons directories |
+| Curriculum designer | Subagent (Terra/medium) | Drafts units, evidence rules, sources, and verification policy before teaching begins | `Use $curriculum-designer to draft a curriculum for <subject>.` | Approved curriculum files under `curricula/<subject>/` |
+| Lesson researcher | Read-only subagent (Terra/medium) | Returns evidence for named claims; never teaches or edits learner files | Normally dispatched by `$teach`; manually: `Use the lesson-researcher to verify these claims for <subject>.` | Teacher saves packets under `curricula/<subject>/verification/` |
+| Curriculum sources | Skill | Catalogs a curriculum-local source library | `Use $curriculum-sources to catalog the sources for <subject>.` | `curricula/<subject>/sources/catalog.md` |
+| Lesson visuals | Skill | Creates a visual only when it materially clarifies the lesson | `Use $lesson-visuals for <relationship or process>.` | `lessons/<subject>/artifacts/` |
+| Interactive assessment | Skill | Runs a local exercise only when the subject permits it | `Use $interactive-assessment for a short exercise on <topic>.` | Observed results in progress and lesson records |
+
+The main teacher preserves the probe → short plan → learner approval → bite-sized teach/check loop. After approval, it verifies the next small factual horizon before teaching it. One packet can support several turns; when the next node is predictable, the teacher reuses the same researcher thread to refill in the background when the harness supports it, otherwise refills synchronously. The researcher remains read-only; the teacher saves each returned packet under a unique name and maintains a rebuildable index. It does not advance to new factual content until the packet arrives, and it stops using out-of-scope coverage when your direction changes. Verification improves trust, but is not infallible.
