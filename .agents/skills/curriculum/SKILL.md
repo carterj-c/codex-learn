@@ -13,7 +13,7 @@ When the user names a curriculum or uses a subject entry skill:
 
 1. Read `curricula/<subject>/subject-curriculum.md` for the subject's objectives, probe modifiers, and progression rules.
 2. Read `curricula/<subject>/progress.md` for demonstrated knowledge, current gaps, stale knowledge, and revisit flags.
-3. Read `curricula/<subject>/sources/catalog.md` when it exists to locate only the course materials relevant to the current topic.
+3. Read `curricula/<subject>/sources/catalog.md` when it exists to locate only the course materials relevant to the current topic. Read `sources/index.md` and only relevant per-source maps when they exist; use them as locators, then inspect the original source for any claim that needs support.
 4. Read `curricula/<subject>/verification/index.md` when it exists to locate candidate packets for the current claims. Treat it as a convenience cache and scan packet filenames if it is absent, stale, or conflicted; open only likely matches.
 5. Read `lessons/<subject>/index.md` when it exists to locate relevant earlier explanations and artifacts. Do not load every lesson note.
 6. Read `curricula/<subject>/curriculum-map.md` only when selecting a next unit or checking prerequisite paths.

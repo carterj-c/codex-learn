@@ -19,6 +19,12 @@ Or describe a URL, book, lecture slide deck, handout, assignment, or rubric and 
 
 Create `sources/catalog.md` if absent. Give every source a stable short ID and record its path or URL, type, authority, relevant units, restrictions, and a one-line note on what it should answer. Inspect only enough metadata or content to catalog it; do not summarize every source by default.
 
+## Index sources
+
+After cataloging a new or changed source, start the `source-indexer` subagent for that source ID. It creates a compact structural retrieval map in `sources/index/<source-id>.md` and updates `sources/index.md`. The map records useful headings, page or slide ranges when available, keywords, relevant curriculum units, and extraction warnings.
+
+The index is a locator, not a replacement for the source. Do not write a chapter-by-chapter summary, copy substantial source text, or reindex unchanged material. The curriculum designer and researcher may use it to find a likely section, then must open the original source before making an alignment or verification claim.
+
 ## Catalog template
 
 ```markdown

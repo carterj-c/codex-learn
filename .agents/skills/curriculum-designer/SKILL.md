@@ -22,7 +22,7 @@ The project task only dispatches and presents the result. The dedicated `curricu
 
 Give the subagent the learner's subject, target capability, context, desired pace or time budget when known, constraints, and teaching preferences. Ask only for details that materially affect the scope. If the learner has no initial baseline, mark it as an assumption for the later teacher to verify rather than turning this turn into a diagnostic.
 
-If `curricula/<subject>/sources/catalog.md` exists, give the subagent the catalog and only the source entries relevant to the proposed curriculum. The learner decides the source role in their request; never infer it from the catalog.
+If `curricula/<subject>/sources/catalog.md` exists, give the subagent the catalog, `sources/index.md` when present, and only the source entries or maps relevant to the proposed curriculum. The learner decides the source role in their request; never infer it from the catalog or index. Use an index only to locate a likely section, then inspect the original source before claiming alignment.
 
 Ask for a source decision before drafting when cataloged sources exist but the learner has not said whether to:
 
@@ -51,4 +51,4 @@ Do not create an active curriculum, write a progress ledger, or begin teaching u
 
 ## Apply an approved draft
 
-On an explicit approval, use the same custom subagent to create or revise the curriculum files, record the approved source directive and verification policy in `subject-curriculum.md`, and create a blank lesson index plus `sources/README.md`, `sources/catalog.md`, `verification/README.md`, and `verification/index.md` when absent. Preserve observed evidence, existing lessons, artifacts, source catalogs, source directives, verification packets, and their index when revising. The generic teacher takes over only in a later teaching task when the learner invokes `$curriculum` or a subject entry skill.
+On an explicit approval, use the same custom subagent to create or revise the curriculum files, record the approved source directive and verification policy in `subject-curriculum.md`, and create a blank lesson index plus `sources/README.md`, `sources/catalog.md`, `sources/index.md`, `verification/README.md`, and `verification/index.md` when absent. Preserve observed evidence, existing lessons, artifacts, source catalogs, source indexes, source directives, verification packets, and their index when revising. The generic teacher takes over only in a later teaching task when the learner invokes `$curriculum` or a subject entry skill.

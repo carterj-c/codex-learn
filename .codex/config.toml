@@ -12,3 +12,7 @@ config_file = "agents/curriculum-designer.toml"
 [agents.lesson-researcher]
 description = "Verify lesson claims against relevant curriculum sources before teaching relies on them."
 config_file = "agents/lesson-researcher.toml"
+
+[agents.source-indexer]
+description = "Create compact structural retrieval maps for curriculum sources."
+config_file = "agents/source-indexer.toml"

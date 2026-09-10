@@ -11,6 +11,7 @@ curriculum_designer_skill=.agents/skills/curriculum-designer/SKILL.md
 curriculum_designer_agent=.codex/agents/curriculum-designer.toml
 curriculum_sources_skill=.agents/skills/curriculum-sources/SKILL.md
 lesson_researcher_agent=.codex/agents/lesson-researcher.toml
+source_indexer_agent=.codex/agents/source-indexer.toml
 
 test -f "$teach_skill"
 test -f "$visuals_skill"
@@ -21,6 +22,7 @@ test -f "$curriculum_designer_skill"
 test -f "$curriculum_designer_agent"
 test -f "$curriculum_sources_skill"
 test -f "$lesson_researcher_agent"
+test -f "$source_indexer_agent"
 test -f .codex/config.toml
 test -f README.md
 test -f lessons/README.md
@@ -29,6 +31,7 @@ test -f curricula/ml-mathematics/curriculum-map.md
 test -f curricula/ml-mathematics/progress.md
 test -f curricula/ml-mathematics/sources/README.md
 test -f curricula/ml-mathematics/sources/catalog.md
+test -f curricula/ml-mathematics/sources/index.md
 test -f curricula/ml-mathematics/verification/README.md
 test -f curricula/ml-mathematics/verification/index.md
 test ! -e curricula/ml-mathematics/sources/design-brief.md
@@ -42,6 +45,7 @@ grep -q '^name: curriculum-designer$' "$curriculum_designer_skill"
 grep -q '^name: curriculum-sources$' "$curriculum_sources_skill"
 grep -q '^name = "curriculum-designer"$' "$curriculum_designer_agent"
 grep -q '^name = "lesson-researcher"$' "$lesson_researcher_agent"
+grep -q '^name = "source-indexer"$' "$source_indexer_agent"
 grep -q '^## Customize This Skill First$' "$teach_skill"
 grep -q 'rendered SVG or PNG' "$visuals_skill"
 grep -q 'local HTML/CSS/JavaScript' "$visuals_skill"
@@ -65,7 +69,10 @@ grep -q 'model = "gpt-5.6-terra"' "$curriculum_designer_agent"
 grep -q 'model_reasoning_effort = "medium"' "$curriculum_designer_agent"
 grep -q 'Balance factual trust against researcher latency' "$curriculum_designer_agent"
 grep -q 'Maintain a curriculum-local source library' "$curriculum_sources_skill"
+grep -q '^## Index sources$' "$curriculum_sources_skill"
+grep -q 'structural retrieval map' "$source_indexer_agent"
 grep -q 'course-provided sources' "$lesson_researcher_agent"
+grep -q 'Treat an index as a locator only' "$lesson_researcher_agent"
 grep -q 'lessons/<subject>/artifacts' "$curriculum_skill"
 grep -q 'Use curriculum sources selectively' "$curriculum_skill"
 grep -q 'Verify the teaching horizon' "$teach_skill"
@@ -100,6 +107,7 @@ grep -q '^default_subagent_model = "gpt-5.6-terra"$' .codex/config.toml
 grep -q '^default_subagent_reasoning_effort = "medium"$' .codex/config.toml
 grep -q '^\[agents.curriculum-designer\]$' .codex/config.toml
 grep -q '^\[agents.lesson-researcher\]$' .codex/config.toml
+grep -q '^\[agents.source-indexer\]$' .codex/config.toml
 
 if rg -q 'ask_user_question|md-log|Obsidian wikilink|pi-interactive-subagents' .agents/skills; then
   echo 'Pi-specific wording remains in Codex skills.' >&2

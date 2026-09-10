@@ -92,10 +92,10 @@ When sources are present, the learner states directly whether the designer follo
 Drop course materials into `curricula/<subject>/sources/`, then say:
 
 ```text
-Use $curriculum-sources to catalog the sources for <subject>.
+Use $curriculum-sources to catalog and index the sources for <subject>.
 ```
 
-The resulting `sources/catalog.md` is the retrieval index for the curriculum designer, teacher, and Terra/medium `lesson-researcher` subagent. They read the catalog first and open only relevant sources for a curriculum decision or claim verification. Keep copyrighted, instructor-only, and personal material in your private curriculum repository.
+The resulting `sources/catalog.md` and compact `sources/index.md` help the curriculum designer, teacher, and Terra/medium `lesson-researcher` subagent find relevant source sections. They use the index only as a locator and open the original source for a curriculum decision or claim verification. Keep copyrighted, instructor-only, and personal material in your private curriculum repository.
 
 ## Model routing
 
@@ -110,7 +110,7 @@ The project configuration uses `gpt-5.6-sol` with high reasoning for the learner
 | Subject entry skill | Skill | Starts or continues a subject-specific arc | `Use $ml-mathematics to continue my ML mathematics curriculum.` | That subject's curriculum and lessons directories |
 | Curriculum designer | Subagent (Terra/medium) | Drafts units, evidence rules, sources, and verification policy before teaching begins | `Use $curriculum-designer to draft a curriculum for <subject>.` | Approved curriculum files under `curricula/<subject>/` |
 | Lesson researcher | Read-only subagent (Terra/medium) | Returns evidence for named claims; never teaches or edits learner files | Normally dispatched by `$teach`; manually: `Use the lesson-researcher to verify these claims for <subject>.` | Teacher saves packets under `curricula/<subject>/verification/` |
-| Curriculum sources | Skill | Catalogs a curriculum-local source library | `Use $curriculum-sources to catalog the sources for <subject>.` | `curricula/<subject>/sources/catalog.md` |
+| Curriculum sources | Skill + Terra/medium indexer | Catalogs sources and maps their useful structure | `Use $curriculum-sources to catalog and index the sources for <subject>.` | `curricula/<subject>/sources/` |
 | Lesson visuals | Skill | Creates a visual only when it materially clarifies the lesson | `Use $lesson-visuals for <relationship or process>.` | `lessons/<subject>/artifacts/` |
 | Interactive assessment | Skill | Runs a local exercise only when the subject permits it | `Use $interactive-assessment for a short exercise on <topic>.` | Observed results in progress and lesson records |
 
