@@ -80,9 +80,12 @@ To design a curriculum without starting a lesson, open a normal project task and
 ```text
 Use $curriculum-designer to draft a curriculum for <subject>.
 My intended outcome is <capability>.
+Follow <source ID / course outline / selected chapters>.
 ```
 
 This dispatches the dedicated `curriculum-designer` subagent on `gpt-5.6-terra` with medium reasoning. It returns a reviewable curriculum draft; it does not invoke the teacher, probe the learner, or write active curriculum files until you explicitly approve it.
+
+When sources are present, the learner decides whether the designer follows an outline, covers selected material, uses sources as references, or ignores them for the roadmap. That choice is saved in `curricula/<subject>/sources/design-brief.md`; the designer verifies the cited sections before claiming curriculum alignment.
 
 ## Add course sources
 
