@@ -19,19 +19,6 @@ Or describe a URL, book, lecture slide deck, handout, assignment, or rubric and 
 
 Create `sources/catalog.md` if absent. Give every source a stable short ID and record its path or URL, type, authority, relevant units, restrictions, and a one-line note on what it should answer. Inspect only enough metadata or content to catalog it; do not summarize every source by default.
 
-## Set the source-design directive
-
-Create or update `sources/design-brief.md` when the learner says how the curriculum should use the sources. Record the learner's words and the selected source IDs or sections. Do not decide this role on their behalf.
-
-Examples:
-
-- **Follow an outline:** `Follow course-outline exactly; use other sources only to clarify.`
-- **Selected coverage:** `Teach chapters 3–6 of course-text, skipping optional sections.`
-- **Reference-only:** `Use lecture-slides as references while designing an independent roadmap.`
-- **Independent:** `Do not constrain the roadmap to these sources.`
-
-The curriculum designer must ask for this decision if a catalog exists but the design brief and current request are silent.
-
 ## Catalog template
 
 ```markdown

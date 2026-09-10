@@ -29,7 +29,7 @@ test -f curricula/ml-mathematics/curriculum-map.md
 test -f curricula/ml-mathematics/progress.md
 test -f curricula/ml-mathematics/sources/README.md
 test -f curricula/ml-mathematics/sources/catalog.md
-test -f curricula/ml-mathematics/sources/design-brief.md
+test ! -e curricula/ml-mathematics/sources/design-brief.md
 
 grep -q '^name: teach$' "$teach_skill"
 grep -q '^name: lesson-visuals$' "$visuals_skill"
@@ -60,7 +60,6 @@ grep -q 'source decision before drafting' "$curriculum_designer_skill"
 grep -q 'model = "gpt-5.6-terra"' "$curriculum_designer_agent"
 grep -q 'model_reasoning_effort = "medium"' "$curriculum_designer_agent"
 grep -q 'Maintain a curriculum-local source library' "$curriculum_sources_skill"
-grep -q 'Set the source-design directive' "$curriculum_sources_skill"
 grep -q 'course-provided sources' "$lesson_researcher_agent"
 grep -q 'lessons/<subject>/artifacts' "$curriculum_skill"
 grep -q 'Use curriculum sources selectively' "$curriculum_skill"
