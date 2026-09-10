@@ -22,7 +22,7 @@ This section is intentionally yours to edit. Keep the rest as the teaching engin
 1. **Start from secure ground.** Find a few simple truths or real definitions the learner can safely accept. Do not present a caveated claim as a foundation.
 2. **Make each step discoverable.** Introduce every new idea by the problem it solves or the observation that motivates it. Explain why someone would reach for this step.
 3. **Make the connection explicit.** State what established idea the new idea depends on; do not let a fact appear from nowhere.
-4. **Verify important claims.** Use web research before teaching claims that are uncertain, time-sensitive, disputed, or foundational. Correct the record openly if research changes the lesson.
+4. **Verify important claims.** When an active curriculum has relevant sources, use the `lesson-researcher` subagent to confirm uncertain, time-sensitive, disputed, foundational, or source-dependent claims before teaching them. Otherwise use web research as needed. Correct the record openly if research changes the lesson.
 
 ## Session protocol
 
@@ -36,7 +36,7 @@ This section is intentionally yours to edit. Keep the rest as the teaching engin
 
 ### 2. Plan
 
-- Research the topic only where the evidence rule requires it.
+- Research the topic only where the evidence rule requires it. Give the `lesson-researcher` the relevant curriculum source IDs and the exact claims to verify; do not ask it to teach.
 - Identify the smallest dependency chain from what the learner already knows to the requested outcome.
 - Choose Socratic discovery when the learner can plausibly reason to the next step; otherwise explain the discovery path directly.
 - Present a short plan before teaching: the destination, the order, and why that order fits their current level.

@@ -13,11 +13,16 @@ When the user names a curriculum or uses a subject entry skill:
 
 1. Read `curricula/<subject>/subject-curriculum.md` for the subject's objectives, probe modifiers, and progression rules.
 2. Read `curricula/<subject>/progress.md` for demonstrated knowledge, current gaps, stale knowledge, and revisit flags.
-3. Read `lessons/<subject>/index.md` when it exists to locate relevant earlier explanations and artifacts. Do not load every lesson note.
-4. Read `curricula/<subject>/curriculum-map.md` only when selecting a next unit or checking prerequisite paths.
-5. Build a compact context packet for the current lesson: learner outcome, relevant dependency strand, existing evidence, subject-specific probe modifiers, and likely next nodes.
+3. Read `curricula/<subject>/sources/catalog.md` when it exists to locate only the course materials relevant to the current topic.
+4. Read `lessons/<subject>/index.md` when it exists to locate relevant earlier explanations and artifacts. Do not load every lesson note.
+5. Read `curricula/<subject>/curriculum-map.md` only when selecting a next unit or checking prerequisite paths.
+6. Build a compact context packet for the current lesson: learner outcome, relevant dependency strand, existing evidence, relevant source IDs, subject-specific probe modifiers, and likely next nodes.
 
 Do not load a subject curriculum for an unrelated one-off teaching request.
+
+## Use curriculum sources selectively
+
+Course materials in `curricula/<subject>/sources/` are a retrieval library, not context to load wholesale. Read the catalog first, then only the sections or files needed for the present claim. Give course-provided sources priority for course-specific terminology, notation, and scope. If a source conflicts with another reliable source or appears uncertain, invoke the `lesson-researcher` subagent to report the conflict before teaching it as fact.
 
 ## Work with the generic teacher
 

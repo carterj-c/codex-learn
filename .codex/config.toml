@@ -8,3 +8,7 @@ default_subagent_reasoning_effort = "medium"
 [agents.curriculum-designer]
 description = "Design or substantially revise a subject curriculum without teaching the learner."
 config_file = "agents/curriculum-designer.toml"
+
+[agents.lesson-researcher]
+description = "Verify lesson claims against relevant curriculum sources before teaching relies on them."
+config_file = "agents/lesson-researcher.toml"

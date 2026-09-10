@@ -84,6 +84,16 @@ My intended outcome is <capability>.
 
 This dispatches the dedicated `curriculum-designer` subagent on `gpt-5.6-terra` with medium reasoning. It returns a reviewable curriculum draft; it does not invoke the teacher, probe the learner, or write active curriculum files until you explicitly approve it.
 
+## Add course sources
+
+Drop course materials into `curricula/<subject>/sources/`, then say:
+
+```text
+Use $curriculum-sources to catalog the sources for <subject>.
+```
+
+The resulting `sources/catalog.md` is the retrieval index for the curriculum designer, teacher, and Terra/medium `lesson-researcher` subagent. They read the catalog first and open only relevant sources for a curriculum decision or claim verification. Keep copyrighted, instructor-only, and personal material in your private curriculum repository.
+
 ## Model routing
 
-The project configuration uses `gpt-5.6-sol` with high reasoning for the learner-facing teacher, defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning, and pins the `curriculum-designer` role to that same Terra/medium configuration. These defaults apply when opening a new Codex task in this project; an already-running task keeps its selected model.
+The project configuration uses `gpt-5.6-sol` with high reasoning for the learner-facing teacher, defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning, and pins the `curriculum-designer` and `lesson-researcher` roles to that same Terra/medium configuration. These defaults apply when opening a new Codex task in this project; an already-running task keeps its selected model.
