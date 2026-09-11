@@ -51,4 +51,8 @@ Do not create an active curriculum, write a progress ledger, or begin teaching u
 
 ## Apply an approved draft
 
-On an explicit approval, use the same custom subagent to create or revise the curriculum files, record the approved source directive and verification policy in `subject-curriculum.md`, and create a blank lesson index plus `sources/README.md`, `sources/catalog.md`, `sources/index.md`, `verification/README.md`, and `verification/index.md` when absent. Preserve observed evidence, existing lessons, artifacts, source catalogs, source indexes, source directives, verification packets, and their index when revising. The generic teacher takes over only in a later teaching task when the learner invokes `$curriculum` or a subject entry skill.
+On an explicit approval, use the same custom subagent to create or revise the curriculum files, record the approved source directive and verification policy in `subject-curriculum.md`, and create a blank lesson index plus `sources/README.md`, `sources/catalog.md`, `sources/index.md`, `verification/README.md`, and `verification/index.md` when absent.
+
+Also create or revise `.agents/skills/<subject>/SKILL.md` as the curriculum's subject entry point. Use the same stable lowercase, hyphenated subject slug as `curricula/<subject>/`. The entry skill must have valid frontmatter, route through `$curriculum` with that subject and then `$teach`, point to the subject curriculum and evidence paths, and contain only approved subject-specific focus or safety modifiers. Keep it short and preserve unrelated learner-owned instructions when revising an existing entry skill.
+
+Preserve observed evidence, existing lessons, artifacts, source catalogs, source indexes, source directives, verification packets, and their index when revising. The generic teacher takes over only in a later teaching task when the learner invokes the generated subject entry skill or explicitly combines `$curriculum` and `$teach`.
