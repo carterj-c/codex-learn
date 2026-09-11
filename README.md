@@ -2,6 +2,9 @@
 
 This project adapts the teaching method from [amosblomqvist/learn](https://github.com/amosblomqvist/learn) to Codex, and also runs in Claude Code. Its skills, curriculum, lesson, and artifact conventions are harness-neutral; only skill discovery and model routing are adapter-specific, and both harnesses have a checked-in adapter. It keeps the personalized probe → plan → teach loop while removing Pi extensions, the Obsidian requirement, the tmux subagent runtime, and separate visual-rendering setup. The Codex skills, curriculum layer, and documentation are available under the [MIT License](LICENSE).
 
+## Showcase Vid
+https://github.com/user-attachments/assets/fec5ca1e-0472-4122-a102-38734fac95b7
+
 ## Install
 
 ### Prerequisites
