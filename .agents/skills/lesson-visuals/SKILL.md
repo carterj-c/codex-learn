@@ -23,6 +23,7 @@ After saving and inspecting an artifact, use the current harness's available pre
 
 - For an SVG, PNG, or other static artifact, open the saved file in the harness's preview or file viewer when available.
 - For local HTML, serve its artifact directory on localhost and open that URL through the harness's built-in browser or browser integration when available.
+- Harness examples: Codex opens the saved file or local URL in its preview and browser integration; Claude Code can publish a self-contained HTML artifact, or drive a local URL through its Chrome integration.
 - In a CLI with a graphical local session but no browser integration, open the URL in the system default browser when permitted. In a headless or remote CLI, print a copyable localhost URL and artifact path, then ask the learner to open it or use a port-forwarded URL.
 - Keep the lesson note available as the companion explanation when it helps, but make the rendered artifact the visible teaching surface.
 

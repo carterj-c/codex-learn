@@ -5,7 +5,7 @@ description: Use when the user starts or continues a multi-session learning arc 
 
 # Curriculum overlay
 
-Use a curriculum to scope the generic teacher to one long-running subject. A curriculum supplies context and records evidence; it does not replace `$teach` or its probe → plan → teach loop.
+Use a curriculum to scope the generic teacher to one long-running subject. A curriculum supplies context and records evidence; it does not replace `teach` or its probe → plan → teach loop.
 
 ## Resolve curriculum context
 
@@ -27,7 +27,7 @@ Course materials in `curricula/<subject>/sources/` are a retrieval library, not 
 
 ## Verification packets
 
-Read the optional `verification` block in `subject-curriculum.md` before planning factual lesson content. Its mode is `off`, `adaptive`, or `strict`; if absent, use **adaptive** for factual or source-dependent curricula and do not force research for pure derivations or arithmetic. Apply its required and exempt claim classes through `$teach`.
+Read the optional `verification` block in `subject-curriculum.md` before planning factual lesson content. Its mode is `off`, `adaptive`, or `strict`; if absent, use **adaptive** for factual or source-dependent curricula and do not force research for pure derivations or arithmetic. Apply its required and exempt claim classes through `teach`.
 
 The main teacher, not the researcher, stores compact, durable research packets under `curricula/<subject>/verification/`, not in learner progress or lesson records. Use a unique filename containing a UTC timestamp and stable horizon ID so repeated or concurrent work cannot overwrite another packet. Treat `index.md` as a rebuildable retrieval cache: re-read and merge it after saving a packet, preserve existing rows, and scan the packet files if the index is absent, stale, or conflicted. Each packet must include:
 
@@ -61,7 +61,7 @@ When a packet returns, save it first, then update the matching pending row to **
 
 ## Work with the generic teacher
 
-Use the curriculum context to focus `$teach`'s normal probe:
+Use the curriculum context to focus `teach`'s normal probe:
 
 - Start from recorded evidence, but recheck knowledge that is partial, stale, high-impact, or needed as a new prerequisite.
 - Apply subject-specific assessment requirements from `subject-curriculum.md`.
@@ -73,7 +73,7 @@ Use the curriculum context to focus `$teach`'s normal probe:
 The active subject may include an `interactive_assessment` block in `subject-curriculum.md`. Treat it as a subject-scoped permission, not as a replacement for chat-based probing.
 
 - With `mode: off`, use ordinary chat checks only.
-- With `mode: on-request`, use `$interactive-assessment` only after the learner explicitly asks for an interactive quiz, drill, or exercise.
+- With `mode: on-request`, use `interactive-assessment` only after the learner explicitly asks for an interactive quiz, drill, or exercise.
 - With `mode: auto`, the teacher may propose a local exercise when interaction would provide better evidence than a short chat check.
 
 If the block is absent, behave as `off`. Record completed exercise evidence using the same standards as any other observed assessment.

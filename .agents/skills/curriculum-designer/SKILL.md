@@ -5,18 +5,20 @@ description: Use when the learner wants to create or substantially redesign a lo
 
 # Curriculum designer
 
-Run this workflow separately from the teacher. Start the custom `curriculum-designer` subagent; do not invoke `$teach`, `$curriculum`, or a subject teaching entry skill during the design turn.
+Run this workflow separately from the teacher. Start the custom `curriculum-designer` subagent; do not invoke `teach`, `curriculum`, or a subject teaching entry skill during the design turn.
 
 ## Invoke without teaching
 
 The learner can open a normal project task and say:
 
 ```text
-Use $curriculum-designer to draft a curriculum for <subject>.
+Use the curriculum-designer skill to draft a curriculum for <subject>.
 My intended outcome is <capability>.
 ```
 
-This is the single entry point for setting up a curriculum. The project task dispatches and presents the dedicated Terra/medium `curriculum-designer`; it does not run a lesson, probe the learner, or require changing the main task's model.
+Invoke the skill the way the harness expects: `$curriculum-designer` in Codex, `/curriculum-designer` in Claude Code.
+
+This is the single entry point for setting up a curriculum. The project task dispatches and presents the dedicated `curriculum-designer` subagent; it does not run a lesson, probe the learner, or require changing the main task's model.
 
 ## Learner request
 
@@ -24,7 +26,7 @@ Give the subagent the learner's subject, target capability, context, desired pac
 
 ## Prepare sources when present
 
-Before designing, look for material under `curricula/<subject>/sources/`. If the learner has already placed source files or links there, the designer coordinates `$curriculum-sources`: catalog new or changed material, ask only for source choices that materially affect the roadmap, then start `source-indexer` for each new or changed source. Do this before drafting so the design can use the catalog and structural maps.
+Before designing, look for material under `curricula/<subject>/sources/`. If the learner has already placed source files or links there, the designer coordinates `curriculum-sources`: catalog new or changed material, ask only for source choices that materially affect the roadmap, then start `source-indexer` for each new or changed source. Do this before drafting so the design can use the catalog and structural maps.
 
 If `sources/catalog.md` already exists, give the subagent the catalog, `sources/index.md` when present, and only the source entries or maps relevant to the proposed curriculum. The learner decides the source role in their request; never infer it from the catalog or index. Use an index only to locate a likely section, then inspect the original source before claiming alignment.
 
@@ -35,7 +37,7 @@ Ask for a source decision before drafting when cataloged sources exist but the l
 - use named sources as references; or
 - design independently of the sources.
 
-When the learner names an outline or coverage range, verify the relevant source sections before claiming alignment. Use `lesson-researcher` for a compact source-alignment check when needed. If there are no sources yet, identify the highest-value materials the learner could add; do not invent course requirements. The learner may also invoke `$curriculum-sources` directly later to add or refresh material without redesigning the curriculum.
+When the learner names an outline or coverage range, verify the relevant source sections before claiming alignment. Use `lesson-researcher` for a compact source-alignment check when needed. If there are no sources yet, identify the highest-value materials the learner could add; do not invent course requirements. The learner may also invoke `curriculum-sources` directly later to add or refresh material without redesigning the curriculum.
 
 ## Draft first
 
@@ -57,6 +59,6 @@ Do not create an active curriculum, write a progress ledger, or begin teaching u
 
 On an explicit approval, use the same custom subagent to create or revise the curriculum files from [the generic file templates](references/curriculum-files.md), record the approved source directive and verification policy in `subject-curriculum.md`, and create a blank lesson index plus `sources/README.md`, `sources/catalog.md`, `sources/index.md`, `verification/README.md`, and `verification/index.md` when absent.
 
-Also create or revise `.agents/skills/<subject>/SKILL.md` as the curriculum's subject entry point. Use the same stable lowercase, hyphenated subject slug as `curricula/<subject>/`. The entry skill must have valid frontmatter, route through `$curriculum` with that subject and then `$teach`, point to the subject curriculum and evidence paths, and contain only approved subject-specific focus or safety modifiers. Keep it short and preserve unrelated learner-owned instructions when revising an existing entry skill.
+Also create or revise `.agents/skills/<subject>/SKILL.md` as the curriculum's subject entry point. Use the same stable lowercase, hyphenated subject slug as `curricula/<subject>/`. The entry skill must have valid frontmatter, route through `curriculum` with that subject and then `teach`, point to the subject curriculum and evidence paths, and contain only approved subject-specific focus or safety modifiers. Keep it short and preserve unrelated learner-owned instructions when revising an existing entry skill.
 
-Preserve observed evidence, existing lessons, artifacts, source catalogs, source indexes, source directives, verification packets, and their index when revising. The generic teacher takes over only in a later teaching task when the learner invokes the generated subject entry skill or explicitly combines `$curriculum` and `$teach`.
+Preserve observed evidence, existing lessons, artifacts, source catalogs, source indexes, source directives, verification packets, and their index when revising. The generic teacher takes over only in a later teaching task when the learner invokes the generated subject entry skill or explicitly combines `curriculum` and `teach`.

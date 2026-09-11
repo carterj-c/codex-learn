@@ -57,4 +57,4 @@ Use `pending`, `covered`, `stale`, or `superseded` for status. A pending row is 
 
 ## Other indexes
 
-Create the headings and empty tables described by `$curriculum-sources` and `lessons/README.md`.
+Create the headings and empty tables described by `curriculum-sources` and `lessons/README.md`.
