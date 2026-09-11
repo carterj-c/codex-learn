@@ -52,7 +52,7 @@ Apply the active curriculum's verification mode:
 - **adaptive** — verify claims the subject policy marks as required, plus claims that are uncertain, time-sensitive, disputed, foundational, or source-dependent. This is the safe default for factual or source-dependent curricula when no mode is specified.
 - **strict** — verify every material factual claim. Before sending each factual response, map every such claim to a packet claim ID. Send disputed or high-stakes material to the researcher for an after-draft check before teaching it.
 
-For claims that need verification, use `$curriculum` to resolve the current **VERIFICATION GATE** before invoking the named `lesson-researcher`. If it is **missing** or **stale**, first record or refresh the matching `pending` index row, then invoke the researcher with the subject, exact claims, horizon, relevant source IDs, and explicit out-of-scope boundaries. Ask it to return a compact packet; do not ask it to teach or write files. Wait for the first packet before introducing its factual content. Persist the returned packet under `curricula/<subject>/verification/`, then update the matching row to **covered**. A claim is usable only when its meaning and context still match a supported packet claim and its source version or fingerprint still matches. For time-sensitive claims, also check the packet's freshness or recheck trigger.
+For claims that need verification, use `curriculum` to resolve the current **VERIFICATION GATE** before invoking the named `lesson-researcher`. If it is **missing** or **stale**, first record or refresh the matching `pending` index row, then invoke the researcher with the subject, exact claims, horizon, relevant source IDs, and explicit out-of-scope boundaries. Ask it to return a compact packet; do not ask it to teach or write files. Wait for the first packet before introducing its factual content. Persist the returned packet under `curricula/<subject>/verification/`, then update the matching row to **covered**. A claim is usable only when its meaning and context still match a supported packet claim and its source version or fingerprint still matches. For time-sensitive claims, also check the packet's freshness or recheck trigger.
 
 Before each factual response, resolve the verification gate again. **covered** or **not-required** is required to advance into new factual content. With **missing**, **pending**, or **stale**, do not teach the next factual node—even if the learner asks to continue. You may probe, grade a learner answer, correct an error using already-established context, summarize their stated model, or explain that verification is in progress; do not introduce a new factual bridge. Be candid that verification improves trust but is not infallible.
 
@@ -83,12 +83,12 @@ Keep notation defined and connect each symbol to the concept it represents.
 
 ## Visuals and records
 
-- Invoke `$lesson-visuals` only when a relationship, process, geometry, or comparison is materially clearer as a picture.
+- Invoke `lesson-visuals` only when a relationship, process, geometry, or comparison is materially clearer as a picture.
 - For an active curriculum, save every meaningful lesson as a compact durable record and link any rendered artifacts according to `lessons/README.md`. For a one-off topic, create a record only when the learner asks. Do not create a lesson file merely because a casual question was asked.
 - End a completed lesson with the learner's current model, corrections made, and the next useful frontier.
 
 ## Optional curriculum context
 
-When a curriculum is active, use `$curriculum` to load its subject policy and evidence ledger before probing. Treat that context as a scope modifier: it selects relevant prerequisites, identifies stale or partial knowledge, and can require subject-specific checks. It never replaces this skill's core probe → plan → teach process.
+When a curriculum is active, use `curriculum` to load its subject policy and evidence ledger before probing. Treat that context as a scope modifier: it selects relevant prerequisites, identifies stale or partial knowledge, and can require subject-specific checks. It never replaces this skill's core probe → plan → teach process.
 
-Do not create or redesign a curriculum during a teaching task unless the learner explicitly asks for `$curriculum-designer`. The teacher does not catalog sources, build roadmaps, or run setup workflows on its own.
+Do not create or redesign a curriculum during a teaching task unless the learner explicitly asks for `curriculum-designer`. The teacher does not catalog sources, build roadmaps, or run setup workflows on its own.

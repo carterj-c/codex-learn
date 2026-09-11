@@ -5,7 +5,7 @@ description: Use when a learner explicitly requests an interactive local quiz or
 
 # Interactive assessment
 
-Use a small local browser exercise only when interaction adds useful evidence beyond a short chat check. This is a supplement to `$teach`, not a replacement for its probe, feedback, or repair loop.
+Use a small local browser exercise only when interaction adds useful evidence beyond a short chat check. This is a supplement to `teach`, not a replacement for its probe, feedback, or repair loop.
 
 ## Permission and scope
 
@@ -42,4 +42,4 @@ Use a title and page text that say the exercise is local. Do not present client-
 
 For an active curriculum, update `progress.md` only after an observed response or the completed exercise summary. Record the target concept, result, date, misconception if identified, and next action. A perfect result on one short exercise normally establishes at most a useful floor; recheck important prerequisites in another context.
 
-After the exercise, return to `$teach` for targeted repair or the next dependency. Do not turn a lesson into repeated quizzes when an explanation would be more useful.
+After the exercise, return to `teach` for targeted repair or the next dependency. Do not turn a lesson into repeated quizzes when an explanation would be more useful.

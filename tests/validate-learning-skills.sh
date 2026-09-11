@@ -11,6 +11,9 @@ curriculum_designer_agent=.codex/agents/curriculum-designer.toml
 curriculum_sources_skill=.agents/skills/curriculum-sources/SKILL.md
 lesson_researcher_agent=.codex/agents/lesson-researcher.toml
 source_indexer_agent=.codex/agents/source-indexer.toml
+claude_curriculum_designer_agent=.claude/agents/curriculum-designer.md
+claude_lesson_researcher_agent=.claude/agents/lesson-researcher.md
+claude_source_indexer_agent=.claude/agents/source-indexer.md
 
 test -f "$teach_skill"
 test -f "$visuals_skill"
@@ -55,12 +58,12 @@ grep -q 'curriculum-files.md' "$curriculum_designer_skill"
 grep -q 'justified verification mode' "$curriculum_designer_skill"
 grep -q 'verification/README.md' "$curriculum_designer_skill"
 grep -Fq '.agents/skills/<subject>/SKILL.md' "$curriculum_designer_skill"
-grep -Fq 'route through `$curriculum` with that subject and then `$teach`' "$curriculum_designer_skill"
+grep -Fq 'route through `curriculum` with that subject and then `teach`' "$curriculum_designer_skill"
 grep -q 'model = "gpt-5.6-terra"' "$curriculum_designer_agent"
 grep -q 'model_reasoning_effort = "medium"' "$curriculum_designer_agent"
 grep -q 'Balance factual trust against researcher latency' "$curriculum_designer_agent"
 grep -Fq '.agents/skills/<subject>/SKILL.md' "$curriculum_designer_agent"
-grep -Fq 'route through `$curriculum` with that subject and then `$teach`' "$curriculum_designer_agent"
+grep -Fq 'route through `curriculum` with that subject and then `teach`' "$curriculum_designer_agent"
 grep -q 'Maintain a curriculum-local source library' "$curriculum_sources_skill"
 grep -q '^## Index sources$' "$curriculum_sources_skill"
 grep -q 'structural retrieval map' "$source_indexer_agent"
@@ -92,7 +95,7 @@ grep -q 'source identity and fingerprint or version' "$lesson_researcher_agent"
 grep -q 'safe teaching formulation' "$lesson_researcher_agent"
 grep -q 'expiry or recheck trigger' "$lesson_researcher_agent"
 grep -q 'Do not write files' "$lesson_researcher_agent"
-grep -q 'read-only Terra/medium verifier' README.md
+grep -q 'read-only mid-tier verifier' README.md
 grep -q 'probe → short plan → learner approval → bite-sized teach/check loop' README.md
 grep -q 'Do not use `\$...\$`' "$teach_skill"
 grep -q '^model = "gpt-5.6-sol"$' .codex/config.toml
@@ -102,6 +105,49 @@ grep -q '^default_subagent_reasoning_effort = "medium"$' .codex/config.toml
 grep -q '^\[agents.curriculum-designer\]$' .codex/config.toml
 grep -q '^\[agents.lesson-researcher\]$' .codex/config.toml
 grep -q '^\[agents.source-indexer\]$' .codex/config.toml
+
+# Claude Code adapter: skills are discovered through a symlink into the single
+# source of truth, so a curriculum's generated <subject> skill needs no extra step.
+test -L .claude/skills
+test -f .claude/skills/teach/SKILL.md
+test "$(readlink .claude/skills)" = '../.agents/skills'
+test -f .claude/settings.json
+grep -q '"model": "opus"' .claude/settings.json
+
+for claude_agent in \
+  "$claude_curriculum_designer_agent" \
+  "$claude_lesson_researcher_agent" \
+  "$claude_source_indexer_agent"; do
+  test -f "$claude_agent"
+  grep -q '^model: sonnet$' "$claude_agent"
+  grep -q '^tools: ' "$claude_agent"
+done
+
+grep -q '^name: curriculum-designer$' "$claude_curriculum_designer_agent"
+grep -q '^name: lesson-researcher$' "$claude_lesson_researcher_agent"
+grep -q '^name: source-indexer$' "$claude_source_indexer_agent"
+
+# The Codex researcher is confined by sandbox_mode; the Claude researcher is
+# confined by its tools allowlist. Both must deny writes.
+if grep -qE '^tools: .*(Write|Edit|Bash)' "$claude_lesson_researcher_agent"; then
+  echo 'lesson-researcher must not be granted write tools.' >&2
+  exit 1
+fi
+
+# The two adapters describe the same roles and must not drift apart.
+for role in curriculum-designer lesson-researcher source-indexer; do
+  if ! grep -q "^name = \"$role\"$" ".codex/agents/$role.toml"; then
+    echo "Missing Codex definition for $role." >&2
+    exit 1
+  fi
+  if ! grep -q "^name: $role$" ".claude/agents/$role.md"; then
+    echo "Missing Claude definition for $role." >&2
+    exit 1
+  fi
+done
+
+grep -Fq '.claude/skills/' README.md
+grep -Fq '.claude/agents/' README.md
 
 if rg -q 'ask_user_question|md-log|Obsidian wikilink|pi-interactive-subagents' .agents/skills; then
   echo 'Pi-specific wording remains in Codex skills.' >&2
