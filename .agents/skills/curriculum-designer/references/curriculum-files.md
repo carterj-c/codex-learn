@@ -44,6 +44,17 @@ mode: off
 | --- | --- | --- | --- | --- |
 ```
 
-## Source and verification indexes
+## `curricula/<subject>/verification/index.md`
 
-Create the headings and empty tables described by `$curriculum-sources`, `$curriculum`, and `lessons/README.md`. Do not add source rows, verification packets, lesson records, or learner evidence until they exist.
+```markdown
+# <Subject> verification index
+
+| Horizon | Status | Updated | Packet | Claim IDs | Sources / recheck trigger |
+| --- | --- | --- | --- | --- | --- |
+```
+
+Use `pending`, `covered`, `stale`, or `superseded` for status. A pending row is a durable reminder that factual teaching cannot advance for that horizon until a matching packet is saved. Do not add source rows, verification packets, lesson records, or learner evidence until they exist.
+
+## Other indexes
+
+Create the headings and empty tables described by `$curriculum-sources` and `lessons/README.md`.

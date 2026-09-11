@@ -17,7 +17,7 @@ When the user names a curriculum or uses a subject entry skill:
 4. Read `curricula/<subject>/verification/index.md` when it exists to locate candidate packets for the current claims. Treat it as a convenience cache and scan packet filenames if it is absent, stale, or conflicted; open only likely matches.
 5. Read `lessons/<subject>/index.md` when it exists to locate relevant earlier explanations and artifacts. Do not load every lesson note.
 6. Read `curricula/<subject>/curriculum-map.md` only when selecting a next unit or checking prerequisite paths.
-7. Build a compact context packet for the current lesson: learner outcome, relevant dependency strand, existing evidence, relevant source IDs, reusable verification coverage, subject-specific probe modifiers, and likely next nodes.
+7. Build a compact context packet for the current lesson: learner outcome, relevant dependency strand, existing evidence, relevant source IDs, reusable verification coverage, subject-specific probe modifiers, likely next nodes, and the verification gate below.
 
 Do not load a subject curriculum for an unrelated one-off teaching request.
 
@@ -37,6 +37,27 @@ The main teacher, not the researcher, stores compact, durable research packets u
 - uncertainty, conflicts, and an expiry or recheck trigger for volatile claims.
 
 Reuse a packet only when the claim's meaning and context, and its source version or fingerprint, still match. Check freshness for time-sensitive claims. Keep packets compact and indexed so a later lesson can find still-valid coverage without treating stale or out-of-scope evidence as support.
+
+## Verification gate
+
+After the learner approves a lesson route and before factual teaching advances, identify the next small factual horizon and its stable claim IDs. Resolve a verification gate from `verification/index.md` and any likely packet files. Carry this compact state into every continued teaching turn; do not rely on a prior turn's memory of coverage.
+
+```text
+VERIFICATION GATE
+Subject: <subject>
+Horizon: <stable horizon ID, or none during probing>
+Status: not-required | missing | pending | covered | stale
+Claim IDs: <IDs, or none>
+Required action: <none | dispatch researcher | await packet | recheck packet>
+```
+
+- Use **not-required** only before a factual horizon exists, when verification mode is `off`, or when the active policy exempts every claim in it.
+- Use **covered** only when a current packet supports every claim that requires verification for this horizon.
+- Use **missing** when no suitable packet or pending row exists. Before dispatching the researcher, add a `pending` row to the index with the horizon, claim IDs, current date, and no packet link.
+- Use **pending** while the requested packet has not arrived. Preserve the pending row across turns; do not silently replace it with a new request for the same horizon.
+- Use **stale** when a packet's source version, fingerprint, recheck trigger, scope, or claim meaning no longer matches. Mark or add a pending recheck row before dispatching it.
+
+When a packet returns, save it first, then update the matching pending row to **covered** with its path, claim IDs, source summary, and recheck trigger. The index is still rebuildable: if it is missing, stale, or conflicted, scan packet files and reconstruct the status before teaching. Do not emit the gate block to the learner unless they ask about verification; it is an internal handoff that controls the teaching flow.
 
 ## Work with the generic teacher
 
