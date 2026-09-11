@@ -7,6 +7,8 @@ description: Use when the learner wants to add, catalog, or organize course mate
 
 Maintain a curriculum-local source library under `curricula/<subject>/sources/`. It lets the curriculum designer, teacher, and `$lesson-researcher` find relevant course material without loading an entire textbook or folder into every lesson.
 
+The `$curriculum-designer` performs this setup automatically when it finds uncataloged sources while creating a curriculum. Use this skill directly to add, refresh, or organize sources after setup without reopening curriculum design.
+
 ## Add sources
 
 The learner may place files directly in the subject's `sources/` folder, then say:

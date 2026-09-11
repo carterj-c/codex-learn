@@ -1,10 +1,6 @@
 # Codex learning workspace
 
-This project adapts the teaching method from [amosblomqvist/learn](https://github.com/amosblomqvist/learn) to Codex. Its curriculum, lesson, and artifact conventions are harness-neutral; the checked-in skill discovery and model-routing adapters target Codex. It keeps the important part—the personalized probe → plan → teach loop—and removes the Pi extensions, Obsidian requirement, tmux subagent runtime, and separate visual-rendering setup.
-
-## Origin and license
-
-This is a Codex-focused fork/adaptation of [amosblomqvist/learn](https://github.com/amosblomqvist/learn), which inspired the teaching workflow and learning philosophy. This repository's Codex skills, curriculum layer, and documentation are available under the [MIT License](LICENSE).
+This project adapts the teaching method from [amosblomqvist/learn](https://github.com/amosblomqvist/learn) to Codex. Its curriculum, lesson, and artifact conventions are harness-neutral; the checked-in skill discovery and model-routing adapters target Codex. It keeps the personalized probe → plan → teach loop while removing Pi extensions, the Obsidian requirement, the tmux subagent runtime, and separate visual-rendering setup. The Codex skills, curriculum layer, and documentation are available under the [MIT License](LICENSE).
 
 ## Install
 
@@ -25,93 +21,63 @@ Open this folder as a local Codex project, then start a new task. Codex discover
 
 ## Start a lesson
 
-Open a Codex task in this project and say:
+Open a Codex task and say:
 
 ```text
 Use $teach to help me learn <topic>. My intended outcome is <what I want to understand, decide, or build>.
 ```
 
-For example:
-
-```text
-Use $teach to help me learn how transformers perform attention. My intended outcome is to derive the attention calculation and understand why queries, keys, and values are separate.
-```
-
-The teacher will check the prerequisites that matter, propose a small lesson map, wait for your approval, then teach one connection at a time with a short check. When the curriculum requires verification, it prepares a small private claim horizon, waits for a research packet, and uses that packet across several small turns rather than making one oversized response.
+The teacher checks the prerequisites that matter, proposes a small lesson map, waits for approval, then teaches one connection at a time with a short check. When an active curriculum requires verification, it prepares a small claim horizon and waits for its research packet before teaching those claims.
 
 ## Personalize the teacher
 
-Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md) and start with **Customize This Skill First**. That section is the intended control panel for pace, depth, favorite examples, feedback tone, and low-energy behavior. Leave the remainder in place unless you deliberately want to change the learning method.
+Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md), beginning with **Customize This Skill First**, to change pace, depth, examples, feedback tone, or low-energy behavior. Leave the rest in place unless you deliberately want to change the learning method.
 
 ## What changed from the reference
 
 - Pi's skill becomes a project-local Codex skill.
-- Everyday checks remain ordinary chat prompts with immediate, explicit feedback. A curriculum can optionally permit an on-request local interactive exercise through `$interactive-assessment`.
+- Everyday checks remain ordinary chat prompts. A curriculum can optionally permit an on-request local interactive exercise through `$interactive-assessment`.
 - Curriculum lessons become compact, retrievable records in [`lessons/`](lessons/), with a per-subject index and separate artifact directories.
 - A researcher subagent produces compact, reusable claim-verification packets when the subject policy requires evidence.
-- `$lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful, then presents them through the available harness browser or viewer; tables remain comparisons, not visual fallbacks.
+- `$lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful, then presents them through the available harness browser or viewer.
 
 Run `bash tests/validate-learning-skills.sh` to verify the workspace contract after editing the skills.
 
-## Long-running ML mathematics curriculum
+## Create a curriculum
 
-For an adaptive learning arc that persists across Codex tasks, say:
-
-```text
-Use $ml-mathematics to continue my ML mathematics curriculum. My current goal is <goal>.
-```
-
-The subject policy, adaptive roadmap, and evidence ledger live in [`curricula/ml-mathematics/`](curricula/ml-mathematics/). Edit `subject-curriculum.md` to tune this field's teaching style; `progress.md` is updated only from demonstrated learning evidence. The generic `$teach` skill stays available for unrelated subjects.
-
-To request an interactive ML mathematics drill, say:
-
-```text
-Use $interactive-assessment for a short exercise on matrix dimensions.
-```
-
-The ML mathematics curriculum enables that skill only on request. Other curricula stay chat-only unless their own `subject-curriculum.md` opts in with an `interactive_assessment` block.
-
-Meaningful curriculum lessons are stored as compact records, not raw transcripts. Their rendered diagrams, images, and reusable local HTML live beside the relevant lesson under `lessons/<subject>/artifacts/`, where later lessons can retrieve them through the subject index.
-
-## Design a new curriculum
-
-To design a curriculum without starting a lesson, open a normal project task and say:
+This is separate from teaching. Open a normal project task and say:
 
 ```text
 Use $curriculum-designer to draft a curriculum for <subject>.
 My intended outcome is <capability>.
-Follow <source ID / course outline / selected chapters>.
+My sources are in curricula/<subject>/sources/.
 ```
 
-This dispatches the dedicated `curriculum-designer` subagent on `gpt-5.6-terra` with medium reasoning. It returns a reviewable curriculum draft; it does not invoke the teacher, probe the learner, or write active curriculum files until you explicitly approve it. Applying an approved draft also creates the project-local `$<subject>` entry skill that routes the subject through `$curriculum` and then `$teach`.
+The designer is a dedicated Terra/medium subagent launched by this explicit workflow, not a mode of the teacher. It does not invoke the teacher, probe the learner, or write active curriculum files until you approve a draft. It creates the subject's entry skill after approval, which routes future learning through `$curriculum` and `$teach`.
 
-When sources are present, the learner states directly whether the designer follows an outline, covers selected material, uses sources as references, or ignores them for the roadmap. The approved directive is recorded in `subject-curriculum.md`; the designer verifies cited sections before claiming curriculum alignment.
+If the subject source folder already contains material, the designer catalogs and indexes new or changed sources before drafting. It asks whether to follow an outline, cover selected material, use sources as references, or design independently. The approved directive is recorded in `subject-curriculum.md`; cited sections are verified before the designer claims alignment.
 
-## Add course sources
+After approval, the generic templates in [`curriculum-files.md`](.agents/skills/curriculum-designer/references/curriculum-files.md) become a new, subject-specific `curricula/<subject>/` directory. No example curriculum is installed in a fresh workspace.
 
-Drop course materials into `curricula/<subject>/sources/`, then say:
+## Optional: add or refresh sources later
+
+Drop new course materials into `curricula/<subject>/sources/`, then say:
 
 ```text
 Use $curriculum-sources to catalog and index the sources for <subject>.
 ```
 
-The resulting `sources/catalog.md` and compact `sources/index.md` help the curriculum designer, teacher, and Terra/medium `lesson-researcher` subagent find relevant source sections. They use the index only as a locator and open the original source for a curriculum decision or claim verification. Keep copyrighted, instructor-only, and personal material in your private curriculum repository.
+This is optional during setup because the designer does it automatically when it finds uncataloged sources. Use it later without redesigning the curriculum. The resulting `sources/catalog.md` and compact `sources/index.md` help the designer, teacher, and researcher find relevant sections. They are locators only: open the original source for a curriculum decision or claim verification. Keep copyrighted, instructor-only, and personal material in a private repository.
 
 ## Model routing
 
-The project configuration uses `gpt-5.6-sol` with high reasoning for the learner-facing teacher, defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning, and pins the `curriculum-designer` and `lesson-researcher` roles to that same Terra/medium configuration. These defaults apply when opening a new Codex task in this project; an already-running task keeps its selected model.
+The project configuration uses `gpt-5.6-sol` with high reasoning for the learner-facing teacher, defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning, and pins the `curriculum-designer`, `lesson-researcher`, and `source-indexer` roles to that Terra/medium configuration. These defaults apply when opening a new Codex task in this project; an already-running task keeps its selected model.
 
-## Learning components
+## Components and ownership
 
-| Component | Kind | Intended use | Invoke it with | Persistent location |
-| --- | --- | --- | --- | --- |
-| Teacher | Agent (Sol/high main task) | Probe, plan, teach, and check a learner's understanding | `Use $teach to help me learn <topic>.` | Meaningful curriculum lessons: `lessons/<subject>/` |
-| Curriculum overlay | Skill | Loads a subject policy, evidence, sources, and route | `Use $curriculum with $teach for <subject>.` | `curricula/<subject>/` |
-| Subject entry skill | Skill | Starts or continues a subject-specific arc | `Use $ml-mathematics to continue my ML mathematics curriculum.` | That subject's curriculum and lessons directories |
-| Curriculum designer | Subagent (Terra/medium) | Drafts units, evidence rules, sources, and verification policy before teaching begins | `Use $curriculum-designer to draft a curriculum for <subject>.` | Approved curriculum files under `curricula/<subject>/` |
-| Lesson researcher | Read-only subagent (Terra/medium) | Returns evidence for named claims; never teaches or edits learner files | Normally dispatched by `$teach`; manually: `Use the lesson-researcher to verify these claims for <subject>.` | Teacher saves packets under `curricula/<subject>/verification/` |
-| Curriculum sources | Skill + Terra/medium indexer | Catalogs sources and maps their useful structure | `Use $curriculum-sources to catalog and index the sources for <subject>.` | `curricula/<subject>/sources/` |
-| Lesson visuals | Skill | Creates a visual only when it materially clarifies the lesson | `Use $lesson-visuals for <relationship or process>.` | `lessons/<subject>/artifacts/` |
-| Interactive assessment | Skill | Runs a local exercise only when the subject permits it | `Use $interactive-assessment for a short exercise on <topic>.` | Observed results in progress and lesson records |
+- **Teacher — Sol/high main task.** `$teach` runs the probe → plan → teach loop. When a subject curriculum is active, `$curriculum` supplies its local policy and evidence. The generated `$<subject>` skill is a shortcut into that same teacher flow. `$lesson-visuals` and `$interactive-assessment` are optional teaching tools. `lesson-researcher` is the teacher's read-only Terra/medium verifier.
+- **Curriculum designer — Terra/medium subagent, started only by `$curriculum-designer`.** It builds or revises the roadmap without teaching. While setting up a subject, it owns source preparation: `$curriculum-sources` catalogs material and `source-indexer` creates structural maps. After setup, `$curriculum-sources` can also be invoked directly for maintenance.
+
+You do not manually switch the main task from the teacher to a second model. Calling `$curriculum-designer` explicitly keeps the design workflow separate: the normal task dispatches the dedicated designer and presents its draft, while the teacher remains idle.
 
 The main teacher preserves the probe → short plan → learner approval → bite-sized teach/check loop. After approval, it verifies the next small factual horizon before teaching it. One packet can support several turns; when the next node is predictable, the teacher reuses the same researcher thread to refill in the background when the harness supports it, otherwise refills synchronously. The researcher remains read-only; the teacher saves each returned packet under a unique name and maintains a rebuildable index. It does not advance to new factual content until the packet arrives, and it stops using out-of-scope coverage when your direction changes. Verification improves trust, but is not infallible.

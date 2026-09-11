@@ -90,3 +90,5 @@ Keep notation defined and connect each symbol to the concept it represents.
 ## Optional curriculum context
 
 When a curriculum is active, use `$curriculum` to load its subject policy and evidence ledger before probing. Treat that context as a scope modifier: it selects relevant prerequisites, identifies stale or partial knowledge, and can require subject-specific checks. It never replaces this skill's core probe → plan → teach process.
+
+Do not create or redesign a curriculum during a teaching task unless the learner explicitly asks for `$curriculum-designer`. The teacher does not catalog sources, build roadmaps, or run setup workflows on its own.
