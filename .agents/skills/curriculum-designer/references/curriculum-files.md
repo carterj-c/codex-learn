@@ -42,6 +42,11 @@ mode: off
 
 | Concept | Status | Observed evidence | Date | Next action |
 | --- | --- | --- | --- | --- |
+
+## Unit entry checks
+
+| Unit | Status | Observed evidence | Date | Next action |
+| --- | --- | --- | --- | --- |
 ```
 
 ## `curricula/<subject>/verification/index.md`
