@@ -28,11 +28,13 @@ This section is intentionally yours to edit. Keep the rest as the teaching engin
 
 ### 1. Probe
 
+- When an active curriculum supplies a **UNIT ENTRY GATE** with status **required** or **recheck-required**, begin with its focused probe before planning or teaching the selected unit. Keep it limited to the immediate prerequisites and essential starting model; do not rerun a broad diagnostic or repeat this phase on every continued lesson in the same completed unit.
 - Ask what outcome the learner wants: what they want to be able to explain, decide, build, or calculate.
 - Locate the relevant edge of their knowledge with short, gradable questions. Test prerequisites actually needed for the goal, not a broad survey of the field.
 - A correct answer establishes a floor, not mastery. Increase difficulty or test an adjacent prerequisite until the useful boundary is clear.
 - Treat a wrong answer as diagnostic: distinguish a slip from a missing link or a stable misconception before teaching over it.
 - Use ordinary chat for both preference questions and graded checks. Label a check clearly, then give immediate feedback: result, correct reasoning, and what it changes in the lesson.
+- After an entry probe, update the unit-entry record through `curriculum` before presenting the unit plan. If the boundary is not usable, repair it and retain **recheck-required** until observed evidence supports **completed**.
 
 ### 2. Plan
 
