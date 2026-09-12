@@ -17,9 +17,28 @@ When the user names a curriculum or uses a subject entry skill:
 4. Read `curricula/<subject>/verification/index.md` when it exists to locate candidate packets for the current claims. Treat it as a convenience cache and scan packet filenames if it is absent, stale, or conflicted; open only likely matches.
 5. Read `lessons/<subject>/index.md` when it exists to locate relevant earlier explanations and artifacts. Do not load every lesson note.
 6. Read `curricula/<subject>/curriculum-map.md` only when selecting a next unit or checking prerequisite paths.
-7. Build a compact context packet for the current lesson: learner outcome, relevant dependency strand, existing evidence, relevant source IDs, reusable verification coverage, subject-specific probe modifiers, likely next nodes, and the verification gate below.
+7. Build a compact context packet for the current lesson: learner outcome, selected unit, relevant dependency strand, existing evidence, relevant source IDs, reusable verification coverage, subject-specific probe modifiers, likely next nodes, and the unit-entry and verification gates below.
 
 Do not load a subject curriculum for an unrelated one-off teaching request.
+
+## Unit-entry gate
+
+When selecting a new curriculum-map unit, give it a stable unit ID and inspect `progress.md` for its entry-check record. Resolve this gate before teaching any content that belongs to that unit. It is a focused prerequisite boundary, not a broad repeat diagnostic.
+
+```text
+UNIT ENTRY GATE
+Unit: <stable unit ID>
+Status: required | completed | recheck-required
+Immediate prerequisites: <only concepts needed to begin this unit>
+Evidence: <relevant observed evidence, or none>
+Required action: <focused probe | short transfer check>
+```
+
+- Use **required** when the unit has no entry-check record. Ask one or a few short, gradable questions that establish the immediate prerequisites and the unit's essential starting model.
+- Use **completed** only when the ledger records observed evidence adequate for this unit's entry boundary.
+- Use **recheck-required** when that evidence is partial, stale, contradicted, high-impact, or insufficient for the learner's changed goal. Recheck only the named gap.
+
+After the learner responds, record the unit ID, status, observed evidence, date, and next action in a `## Unit entry checks` table in `progress.md`; create that table when it is absent. Mark the gate **completed** only when the entry boundary is usable. A unit may need repair before it is complete, but it does not receive another full entry probe on every continued lesson. Do not use self-reported familiarity as a completed gate.
 
 ## Use curriculum sources selectively
 
@@ -63,6 +82,7 @@ When a packet returns, save it first, then update the matching pending row to **
 
 Use the curriculum context to focus `teach`'s normal probe:
 
+- Resolve the unit-entry gate whenever selecting or entering a new unit. Run its focused probe before the unit's plan or factual teaching; a completed gate does not waive ordinary per-node checks.
 - Start from recorded evidence, but recheck knowledge that is partial, stale, high-impact, or needed as a new prerequisite.
 - Apply subject-specific assessment requirements from `subject-curriculum.md`.
 - Do not treat an unverified baseline assumption as proof of mastery.
@@ -94,4 +114,4 @@ Keep the ledger compact. After a meaningful curriculum lesson, create or update 
 
 ## Select the next unit
 
-Choose the next unit from the curriculum map using the learner's goal, prerequisite state, and expected value for the target subject. The map is a dependency roadmap, not a mandatory order. When evidence changes the route, update the progress ledger and explain the decision.
+Choose the next unit from the curriculum map using the learner's goal, prerequisite state, and expected value for the target subject. The map is a dependency roadmap, not a mandatory order. Resolve its unit-entry gate before treating it as active. When evidence changes the route, update the progress ledger and explain the decision.
