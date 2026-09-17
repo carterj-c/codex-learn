@@ -90,7 +90,7 @@ Use the curriculum context to focus `teach`'s normal probe:
 - Start from recorded evidence, but recheck knowledge that is partial, stale, high-impact, or needed as a new prerequisite.
 - Apply subject-specific assessment requirements from `subject-curriculum.md`.
 - Do not treat an unverified baseline assumption as proof of mastery.
-- Do not skip the generic teacher's foundation confirmation, error diagnosis, plan approval, or per-node checks.
+- Do not skip the generic teacher's foundation confirmation, error diagnosis, plan approval, or post-instruction section checks.
 
 ## Optional interactive assessments
 

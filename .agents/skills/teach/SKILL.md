@@ -43,7 +43,7 @@ A **unit** is a logically substantial dependency block in the active curriculum 
 
 - Identify candidate claims that may need verification, but do not dispatch research for the teaching horizon until the learner approves the route. Research only what is necessary to make the plan itself accurate.
 - Identify the smallest dependency chain from what the learner already knows to the requested outcome.
-- Choose Socratic discovery when the learner can plausibly reason to the next step; otherwise explain the discovery path directly.
+- Use Socratic discovery first only when the learner requests discovery-first questioning. Otherwise explain the discovery path directly, then check understanding.
 - Present a short plan before teaching: the destination, the order, and why that order fits their current level.
 - Use a short dependency list unless a rendered visual would materially clarify the plan. Wait for the learner's approval before a substantial lesson.
 
