@@ -45,9 +45,9 @@ Default to a reviewable design packet. It must include:
 
 - the target capability, scope, and exclusions;
 - prerequisites that the teacher must verify;
-- a dependency-based unit map and why its order fits the goal;
+- a dependency-based unit map and why its order fits the goal; each unit must be a logically substantial block that can contain several taught sections and conversational turns, not a label for every subtopic;
 - the evidence required to mark each important node as usable;
-- proposed subject-specific probe modifiers and artifact, assessment, and verification policy;
+- proposed subject-specific teaching/check modifiers plus artifact, assessment, and verification policy; these modifiers may add domain-specific emphasis but must not redefine the generic unit-entry probe or explain/example/check sequence;
 - a justified verification mode (`off`, `adaptive`, or `strict`) with required and exempt claim classes that balances factual trust against researcher latency;
 - the learner's source directive and a coverage map with source IDs and sections;
 - source coverage, conflicts, and any material still needing confirmation;
@@ -59,6 +59,6 @@ Do not create an active curriculum, write a progress ledger, or begin teaching u
 
 On an explicit approval, use the same custom subagent to create or revise the curriculum files from [the generic file templates](references/curriculum-files.md), record the approved source directive and verification policy in `subject-curriculum.md`, and create a blank lesson index plus `sources/README.md`, `sources/catalog.md`, `sources/index.md`, `verification/README.md`, and `verification/index.md` when absent.
 
-Also create or revise `.agents/skills/<subject>/SKILL.md` as the curriculum's subject entry point. Use the same stable lowercase, hyphenated subject slug as `curricula/<subject>/`. The entry skill must have valid frontmatter, route through `curriculum` with that subject and then `teach`, point to the subject curriculum and evidence paths, and contain only approved subject-specific focus or safety modifiers. Keep it short and preserve unrelated learner-owned instructions when revising an existing entry skill.
+Also create or revise `.agents/skills/<subject>/SKILL.md` as the curriculum's subject entry point. Use the same stable lowercase, hyphenated subject slug as `curricula/<subject>/`. The entry skill must have valid frontmatter, route through `curriculum` with that subject and then `teach`, point to the subject curriculum and evidence paths, and contain only approved subject-specific focus or safety modifiers. Do not restate or override the generic unit-entry probe or teaching sequence. Keep it short and preserve unrelated learner-owned instructions when revising an existing entry skill.
 
 Preserve observed evidence, existing lessons, artifacts, source catalogs, source indexes, source directives, verification packets, and their index when revising. The generic teacher takes over only in a later teaching task when the learner invokes the generated subject entry skill or explicitly combines `curriculum` and `teach`.

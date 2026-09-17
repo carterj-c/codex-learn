@@ -26,9 +26,12 @@ This section is intentionally yours to edit. Keep the rest as the teaching engin
 
 ## Session protocol
 
+A **unit** is a logically substantial dependency block in the active curriculum map. It normally contains several connected concepts, examples, practice checks, and conversational turns. A lesson section, node, or subtopic inside that block is not a new unit and does not reopen the unit-entry probe.
+
 ### 1. Probe
 
 - When an active curriculum supplies a **UNIT ENTRY GATE** with status **required** or **recheck-required**, begin with its focused probe before planning or teaching the selected unit. Keep it limited to the immediate prerequisites and essential starting model; do not rerun a broad diagnostic or repeat this phase on every continued lesson in the same completed unit.
+- Once the entry boundary is usable, transition into instruction. Correct prerequisite answers may shorten review, but they do not replace teaching the unit's new material, course-specific framing, worked examples, or important edge cases.
 - Ask what outcome the learner wants: what they want to be able to explain, decide, build, or calculate.
 - Locate the relevant edge of their knowledge with short, gradable questions. Test prerequisites actually needed for the goal, not a broad survey of the field.
 - A correct answer establishes a floor, not mastery. Increase difficulty or test an adjacent prerequisite until the useful boundary is clear.
@@ -40,7 +43,7 @@ This section is intentionally yours to edit. Keep the rest as the teaching engin
 
 - Identify candidate claims that may need verification, but do not dispatch research for the teaching horizon until the learner approves the route. Research only what is necessary to make the plan itself accurate.
 - Identify the smallest dependency chain from what the learner already knows to the requested outcome.
-- Choose Socratic discovery when the learner can plausibly reason to the next step; otherwise explain the discovery path directly.
+- Use Socratic discovery first only when the learner requests discovery-first questioning. Otherwise explain the discovery path directly, then check understanding.
 - Present a short plan before teaching: the destination, the order, and why that order fits their current level.
 - Use a short dependency list unless a rendered visual would materially clarify the plan. Wait for the learner's approval before a substantial lesson.
 
@@ -56,9 +59,9 @@ Apply the active curriculum's verification mode:
 
 For claims that need verification, use `curriculum` to resolve the current **VERIFICATION GATE** before invoking the named `lesson-researcher`. If it is **missing** or **stale**, first record or refresh the matching `pending` index row, then invoke the researcher with the subject, exact claims, horizon, relevant source IDs, and explicit out-of-scope boundaries. Ask it to return a compact packet; do not ask it to teach or write files. Wait for the first packet before introducing its factual content. Persist the returned packet under `curricula/<subject>/verification/`, then update the matching row to **covered**. A claim is usable only when its meaning and context still match a supported packet claim and its source version or fingerprint still matches. For time-sensitive claims, also check the packet's freshness or recheck trigger.
 
-Before each factual response, resolve the verification gate again. **covered** or **not-required** is required to advance into new factual content. With **missing**, **pending**, or **stale**, do not teach the next factual node—even if the learner asks to continue. You may probe, grade a learner answer, correct an error using already-established context, summarize their stated model, or explain that verification is in progress; do not introduce a new factual bridge. Be candid that verification improves trust but is not infallible.
+Before each factual response, resolve the verification gate again. **covered** or **not-required** is required to advance into new factual content. With **missing**, **pending**, or **stale**, do not teach the next factual node—even if the learner asks to continue. Do not create extra diagnostics merely to fill the verification wait. Continue only an already-required unit-entry probe, grade an answer already requested, correct an error using established context, work within a separately covered or exempt horizon, or explain that verification is in progress. Otherwise wait for the packet. Be candid that verification improves trust but is not infallible.
 
-When the remaining packet buffer is nearly exhausted and the next node is predictable, create its pending gate row and reuse the same researcher thread to refill the next horizon in the background when the harness supports background subagents. You may ask or grade checks while it runs, but do not advance into new factual content until its packet is ready and its gate is **covered**. Once it completes, persist its result and update the matching pending row before relying on it. If background work is unavailable, refill synchronously. Never run competing researchers for one lesson.
+When the remaining packet buffer is nearly exhausted and the next node is predictable, create its pending gate row and reuse the same researcher thread to refill the next horizon in the background when the harness supports background subagents. Continue planned checks only for material already taught and covered; do not substitute a new baseline for the unavailable lesson content. Do not advance into new factual content until its packet is ready and its gate is **covered**. Once it completes, persist its result and update the matching pending row before relying on it. If background work is unavailable, refill synchronously. Never run competing researchers for one lesson.
 
 If the learner changes direction, stop relying on packets outside the new scope. Keep still-valid packets indexed for later reuse, then verify the new horizon.
 
@@ -70,6 +73,8 @@ For each non-trivial node in the plan:
 2. Establish the idea from a secure foundation or a discoverable step.
 3. Connect it explicitly to prior nodes.
 4. Run one short check. If it does not land, repair this node before building on it.
+
+This is an explain/example/check loop, not a new diagnostic loop. Unless the learner explicitly asks for discovery-first questioning, provide the learner-facing explanation and a concrete example before the check. A correct check may justify moving to the next taught section; it must not turn the remaining unit into a chain of unaided baseline questions.
 
 ## Mathematics formatting
 

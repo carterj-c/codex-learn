@@ -9,7 +9,9 @@ Use these as concise starting shapes after a learner approves a curriculum draft
 
 ## Outcome and scope
 
-## Probe modifiers
+## Subject-specific teaching and check modifiers
+
+Only include domain-specific emphasis here. Do not redefine the generic unit-entry probe or explain/example/check sequence.
 
 ## Progression and evidence rules
 
