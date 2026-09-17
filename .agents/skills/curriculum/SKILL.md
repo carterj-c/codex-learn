@@ -11,19 +11,21 @@ Use a curriculum to scope the generic teacher to one long-running subject. A cur
 
 When the user names a curriculum or uses a subject entry skill:
 
-1. Read `curricula/<subject>/subject-curriculum.md` for the subject's objectives, probe modifiers, and progression rules.
+1. Read `curricula/<subject>/subject-curriculum.md` for the subject's objectives, subject-specific teaching or check modifiers, and progression rules.
 2. Read `curricula/<subject>/progress.md` for demonstrated knowledge, current gaps, stale knowledge, and revisit flags.
 3. Read `curricula/<subject>/sources/catalog.md` when it exists to locate only the course materials relevant to the current topic. Read `sources/index.md` and only relevant per-source maps when they exist; use them as locators, then inspect the original source for any claim that needs support.
 4. Read `curricula/<subject>/verification/index.md` when it exists to locate candidate packets for the current claims. Treat it as a convenience cache and scan packet filenames if it is absent, stale, or conflicted; open only likely matches.
 5. Read `lessons/<subject>/index.md` when it exists to locate relevant earlier explanations and artifacts. Do not load every lesson note.
 6. Read `curricula/<subject>/curriculum-map.md` only when selecting a next unit or checking prerequisite paths.
-7. Build a compact context packet for the current lesson: learner outcome, selected unit, relevant dependency strand, existing evidence, relevant source IDs, reusable verification coverage, subject-specific probe modifiers, likely next nodes, and the unit-entry and verification gates below.
+7. Build a compact context packet for the current lesson: learner outcome, selected unit, relevant dependency strand, existing evidence, relevant source IDs, reusable verification coverage, subject-specific teaching or check modifiers, likely next nodes, and the unit-entry and verification gates below.
 
 Do not load a subject curriculum for an unrelated one-off teaching request.
 
 ## Unit-entry gate
 
-When selecting a new curriculum-map unit, give it a stable unit ID and inspect `progress.md` for its entry-check record. Resolve this gate before teaching any content that belongs to that unit. It is a focused prerequisite boundary, not a broad repeat diagnostic.
+A curriculum **unit** is a logically substantial dependency block represented in `curriculum-map.md`; it normally spans multiple connected concepts, lesson sections, practice checks, and conversational turns. A node, section, or subtopic taught inside that block is not another unit.
+
+When selecting a new curriculum-map unit, give it a stable unit ID and inspect `progress.md` for its entry-check record. Resolve this gate once before teaching content that belongs to that unit. It is a focused prerequisite boundary, not a broad repeat diagnostic. Do not reopen it merely because the lesson moves to another section inside the same unit.
 
 ```text
 UNIT ENTRY GATE
@@ -76,13 +78,15 @@ Required action: <none | dispatch researcher | await packet | recheck packet>
 - Use **pending** while the requested packet has not arrived. Preserve the pending row across turns; do not silently replace it with a new request for the same horizon.
 - Use **stale** when a packet's source version, fingerprint, recheck trigger, scope, or claim meaning no longer matches. Mark or add a pending recheck row before dispatching it.
 
+A missing, pending, or stale verification gate is not permission to run additional learner diagnostics. Continue only an entry probe already required for the selected unit or work whose factual horizon is separately covered or exempt; otherwise explain the wait and resume teaching when verification is ready.
+
 When a packet returns, save it first, then update the matching pending row to **covered** with its path, claim IDs, source summary, and recheck trigger. The index is still rebuildable: if it is missing, stale, or conflicted, scan packet files and reconstruct the status before teaching. Do not emit the gate block to the learner unless they ask about verification; it is an internal handoff that controls the teaching flow.
 
 ## Work with the generic teacher
 
 Use the curriculum context to focus `teach`'s normal probe:
 
-- Resolve the unit-entry gate whenever selecting or entering a new unit. Run its focused probe before the unit's plan or factual teaching; a completed gate does not waive ordinary per-node checks.
+- Resolve the unit-entry gate whenever selecting or entering a new curriculum-map unit. Run its focused probe once before the unit's plan or factual teaching. Ordinary checks inside the unit come after explanation and example; they are not new entry probes.
 - Start from recorded evidence, but recheck knowledge that is partial, stale, high-impact, or needed as a new prerequisite.
 - Apply subject-specific assessment requirements from `subject-curriculum.md`.
 - Do not treat an unverified baseline assumption as proof of mastery.
