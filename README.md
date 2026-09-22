@@ -1,6 +1,6 @@
 # Codex learning workspace
 
-This project adapts the teaching method from [amosblomqvist/learn](https://github.com/amosblomqvist/learn) to Codex, and also runs in Claude Code. Its skills, curriculum, lesson, and artifact conventions are harness-neutral; only skill discovery and model routing are adapter-specific, and both harnesses have a checked-in adapter. It keeps the personalized probe → plan → teach loop while removing Pi extensions, the Obsidian requirement, the tmux subagent runtime, and separate visual-rendering setup. The Codex skills, curriculum layer, and documentation are available under the [MIT License](LICENSE).
+This project adapts the teaching method from [amosblomqvist/learn](https://github.com/amosblomqvist/learn) to Codex, and also runs in Claude Code. Its skills, curriculum, lesson, and artifact conventions are harness-neutral; only skill discovery and model routing are adapter-specific, and both harnesses have a checked-in adapter. It keeps personalized, explanation-first teaching while removing Pi extensions, the Obsidian requirement, the tmux subagent runtime, and separate visual-rendering setup. The Codex skills, curriculum layer, and documentation are available under the [MIT License](LICENSE).
 
 ## Showcase Vid
 https://github.com/user-attachments/assets/fec5ca1e-0472-4122-a102-38734fac95b7
@@ -36,11 +36,11 @@ Open a task and say (`$teach` in Codex, `/teach` in Claude Code):
 Use the teach skill to help me learn <topic>. My intended outcome is <what I want to understand, decide, or build>.
 ```
 
-The teacher checks the prerequisites that matter, proposes a small lesson map, waits for approval, then teaches one connection at a time with a short check. When an active curriculum requires verification, it prepares a small claim horizon and waits for its research packet before teaching those claims.
+Before substantial teaching, the teacher completes the short learner setup in [`learner-profile.md`](learner-profile.md) if it is still blank. It then explains and models each new idea before checking understanding. For an active curriculum with an unknown starting point, it uses one 6–10 question placement pass; it does not repeat a prerequisite gate for every new unit.
 
 ## Personalize the teacher
 
-Edit [`teach/SKILL.md`](.agents/skills/teach/SKILL.md), beginning with **Customize This Skill First**, to change pace, depth, examples, feedback tone, or low-energy behavior. Leave the rest in place unless you deliberately want to change the learning method.
+Fill in [`learner-profile.md`](learner-profile.md) to set pace, explanation and example preferences, check style, feedback style, and accessibility or energy needs. If it is incomplete when a lesson begins, the teacher asks a short setup series and saves the answers. Later preferences are recorded when you state them, so you do not have to edit the teaching engine.
 
 ## Harness mapping
 
@@ -62,10 +62,10 @@ The two adapters are kept in sync by hand. When you add or re-scope a subagent, 
 ## What changed from the reference
 
 - Pi's skill becomes a project-local skill, discovered by Codex and Claude Code from the same files.
-- Everyday checks remain ordinary chat prompts. A curriculum can optionally permit an on-request local interactive exercise through `interactive-assessment`.
+- Everyday checks follow explanation and examples instead of asking the learner to discover untaught content.
 - Curriculum lessons become compact, retrievable records in [`lessons/`](lessons/), with a per-subject index and separate artifact directories.
-- A researcher subagent produces compact, reusable claim-verification packets when the subject policy requires evidence.
-- `lesson-visuals` produces inspected SVG/PNG or local HTML artifacts when a real visual is useful, then presents them through the available harness browser or viewer.
+- `teach` owns verification and batches research for the next coherent factual section. The read-only researcher returns a compact source brief for source-heavy curriculum material; there are no packet files or verification gates.
+- When requested, the teacher can create a small visual or interactive local artifact and present it through the available harness browser or viewer.
 
 Run `bash tests/validate-learning-skills.sh` to verify the workspace contract after editing the skills.
 
@@ -79,11 +79,11 @@ My intended outcome is <capability>.
 My sources are in curricula/<subject>/sources/.
 ```
 
-The designer is a dedicated mid-tier subagent launched by this explicit workflow, not a mode of the teacher. It does not invoke the teacher, probe the learner, or write active curriculum files until you approve a draft. It creates the subject's entry skill after approval, which routes future learning through `curriculum` and `teach`.
+The designer is a dedicated mid-tier subagent launched by this explicit workflow, not a mode of the teacher. It does not teach or write active curriculum files until you approve a draft. It creates the subject's entry skill after approval, which routes future learning through `curriculum` and `teach`.
 
 If the subject source folder already contains material, the designer catalogs and indexes new or changed sources before drafting. It asks whether to follow an outline, cover selected material, use sources as references, or design independently. The approved directive is recorded in `subject-curriculum.md`; cited sections are verified before the designer claims alignment.
 
-After approval, the generic templates in [`curriculum-files.md`](.agents/skills/curriculum-designer/references/curriculum-files.md) become a new, subject-specific `curricula/<subject>/` directory. No example curriculum is installed in a fresh workspace.
+After approval, the generic templates in [`curriculum-files.md`](.agents/skills/curriculum-designer/references/curriculum-files.md) become a new, subject-specific `curricula/<subject>/` directory. Each curriculum has separate learner notes for preferences, reported struggles, and route decisions; these self-reports remain distinct from observed progress evidence. No example curriculum is installed in a fresh workspace.
 
 ## Optional: add or refresh sources later
 
@@ -107,9 +107,8 @@ These defaults apply when opening a new task or session in this project; an alre
 
 ## Components and ownership
 
-- **Teacher — the main task, on the harness's high-reasoning model.** `teach` runs the probe → plan → teach loop. When a subject curriculum is active, `curriculum` supplies its local policy and evidence. The generated `<subject>` entry skill is a shortcut into that same teacher flow. `lesson-visuals` and `interactive-assessment` are optional teaching tools. `lesson-researcher` is the teacher's read-only mid-tier verifier.
-- **Curriculum designer — mid-tier subagent, started only by `curriculum-designer`.** It builds or revises the roadmap without teaching. While setting up a subject, it owns source preparation: `curriculum-sources` catalogs material and `source-indexer` creates structural maps. After setup, `curriculum-sources` can also be invoked directly for maintenance.
+- **Teacher — the main task, on the harness's high-reasoning model.** `teach` owns explanation-first instruction and factual verification. It uses `lesson-researcher` for source-heavy curriculum material and creates requested local visuals or exercises directly.
+- **Curriculum layer — persistent subject context.** `curriculum` supplies the current route, learner notes, source locators, and observed evidence. It may adapt an active route with the learner during teaching. Initial placement is used only when the starting point is unknown; new units do not automatically reopen a diagnostic gate.
+- **Curriculum designer — mid-tier subagent, started only by `curriculum-designer`.** It creates the initial roadmap or handles a substantial redesign. During setup, `curriculum-sources` catalogs material and `source-indexer` creates structural maps. After setup, `curriculum-sources` can also be invoked directly for maintenance.
 
-You do not manually switch the main task from the teacher to a second model. Calling `curriculum-designer` explicitly keeps the design workflow separate: the normal task dispatches the dedicated designer and presents its draft, while the teacher remains idle.
-
-The main teacher preserves the probe → short plan → learner approval → bite-sized teach/check loop. A curriculum unit is a substantial dependency block that normally spans several taught sections and conversational turns. Each newly selected unit starts with one focused, recorded prerequisite probe; its internal sections use explanation and examples before ordinary checks rather than reopening the probe. After approval, the teacher resolves a verification gate for the next factual horizon: a packet must be `covered` before new factual content advances. `missing`, `pending`, or `stale` coverage is not an invitation to add diagnostics merely to fill the wait; the teacher may finish an already-required entry check, grade an answer already requested, work within separately covered or exempt material, or explain that verification is pending. One packet can support several turns; when the next node is predictable, the teacher creates a pending gate row and reuses the same researcher thread to refill in the background when the harness supports it, otherwise refills synchronously. The researcher remains read-only; the teacher saves each returned packet under a unique name and maintains a rebuildable index. It stops using out-of-scope coverage when your direction changes. Verification improves trust, but is not infallible.
+You do not manually switch the main task from the teacher to a second model. Calling `curriculum-designer` explicitly keeps initial design and major redesign separate. Ordinary preference changes, reported gaps, and route adjustments remain part of the active teaching task and are saved immediately.
