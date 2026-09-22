@@ -11,7 +11,7 @@ https://github.com/user-attachments/assets/fec5ca1e-0472-4122-a102-38734fac95b7
 
 - Git
 - One supported harness, signed in and able to open a local project:
-  - the Codex desktop app or Codex CLI, with access to `gpt-5.6-sol` and `gpt-5.6-terra` for this repository's configured routing; or
+  - the Codex desktop app or Codex CLI, with access to `gpt-6-sol` and `gpt-6-luna` for this repository's configured routing; or
   - Claude Code, with access to Opus and Sonnet
 - A filesystem that supports symlinks (`.claude/skills` is a symlink into `.agents/skills`)
 
@@ -53,8 +53,8 @@ The skills name other skills and subagents in bare backticks, such as `teach` or
 | Subagent definitions | `.codex/agents/*.toml` | `.claude/agents/*.md` |
 | Start a subagent | named custom agent | Agent tool with `subagent_type` |
 | Project config | `.codex/config.toml` | `.claude/settings.json` |
-| Teacher model | `gpt-5.6-sol`, high reasoning | Opus |
-| Subagent model | `gpt-5.6-terra`, medium reasoning | Sonnet |
+| Teacher model | `gpt-6-sol`, high reasoning | Opus |
+| Subagent model | `gpt-6-luna`, medium reasoning | Sonnet |
 | Researcher write protection | `sandbox_mode = "read-only"` | frontmatter `tools:` allowlist with no Write, Edit, or Bash |
 
 The two adapters are kept in sync by hand. When you add or re-scope a subagent, change both `.codex/agents/` and `.claude/agents/`, then run the validator.
@@ -99,7 +99,7 @@ This is optional during setup because the designer does it automatically when it
 
 The intent is the same in both harnesses: a strong learner-facing teacher, and cheaper mid-tier subagents for design, research, and indexing.
 
-On Codex, `.codex/config.toml` uses `gpt-5.6-sol` with high reasoning for the teacher, defaults every spawned subagent to `gpt-5.6-terra` with medium reasoning, and pins the `curriculum-designer`, `lesson-researcher`, and `source-indexer` roles to that Terra/medium configuration.
+On Codex, `.codex/config.toml` uses `gpt-6-sol` with high reasoning for the teacher, defaults every spawned subagent to `gpt-6-luna` with medium reasoning, and pins the `curriculum-designer`, `lesson-researcher`, and `source-indexer` roles to that Luna/medium configuration.
 
 On Claude Code, `.claude/settings.json` selects Opus for the main session and each agent in `.claude/agents/` sets `model: sonnet`.
 

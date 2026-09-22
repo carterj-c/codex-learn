@@ -103,9 +103,9 @@ grep -q 'learner-notes.md' "$curriculum_designer_skill"
 grep -q 'Do not repeat generic teaching' "$curriculum_designer_skill"
 
 # Codex and Claude adapters retain the expected models and matching role names.
-grep -q '^model = "gpt-5.6-sol"$' .codex/config.toml
+grep -q '^model = "gpt-6-sol"$' .codex/config.toml
 grep -q '^model_reasoning_effort = "high"$' .codex/config.toml
-grep -q '^default_subagent_model = "gpt-5.6-terra"$' .codex/config.toml
+grep -q '^default_subagent_model = "gpt-6-luna"$' .codex/config.toml
 grep -q '^default_subagent_reasoning_effort = "medium"$' .codex/config.toml
 
 for role in curriculum-designer lesson-researcher source-indexer; do
@@ -125,8 +125,13 @@ for claude_agent in \
   grep -q '^tools: ' "$claude_agent"
 done
 
-grep -q 'model = "gpt-5.6-terra"' "$curriculum_designer_agent"
-grep -q 'model_reasoning_effort = "medium"' "$curriculum_designer_agent"
+for codex_agent in \
+  "$curriculum_designer_agent" \
+  "$lesson_researcher_agent" \
+  "$source_indexer_agent"; do
+  grep -q 'model = "gpt-6-luna"' "$codex_agent"
+  grep -q 'model_reasoning_effort = "medium"' "$codex_agent"
+done
 
 # Both harnesses discover the same skills.
 test -L .claude/skills

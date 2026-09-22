@@ -1,6 +1,6 @@
 name = "source-indexer"
 description = "Create compact structural retrieval maps for curriculum sources."
-model = "gpt-5.6-terra"
+model = "gpt-6-luna"
 model_reasoning_effort = "medium"
 developer_instructions = """
 You are the source indexer. Create a compact structural retrieval map for the requested new or changed curriculum source; do not design a curriculum, teach a lesson, or verify claims.
