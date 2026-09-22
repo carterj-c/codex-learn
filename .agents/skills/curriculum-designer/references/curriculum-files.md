@@ -1,6 +1,6 @@
 # Generic curriculum file templates
 
-Use these as concise starting shapes after a learner approves a curriculum draft. Replace every placeholder with the approved subject-specific content; do not create an example curriculum in the repository.
+Use these concise starting shapes after the learner approves a curriculum draft. Replace every placeholder with approved subject-specific content; do not create an example curriculum in the repository.
 
 ## `curricula/<subject>/subject-curriculum.md`
 
@@ -9,21 +9,13 @@ Use these as concise starting shapes after a learner approves a curriculum draft
 
 ## Outcome and scope
 
-## Probe modifiers
+## Subject-specific teaching modifiers
 
 ## Progression and evidence rules
 
 ## Source directive
 
-## Verification
-
-mode: adaptive
-required_claim_classes: []
-exempt_claim_classes: []
-
-## Optional interactive assessment
-
-mode: off
+## Safety constraints
 ```
 
 ## `curricula/<subject>/curriculum-map.md`
@@ -35,31 +27,34 @@ mode: off
 | --- | --- | --- | --- |
 ```
 
+## `curricula/<subject>/learner-notes.md`
+
+```markdown
+# <Subject> learner notes
+
+## Subject preferences
+
+## Learner-reported needs
+
+Self-reports are not mastery evidence.
+
+## Route decisions
+```
+
 ## `curricula/<subject>/progress.md`
 
 ```markdown
 # <Subject> progress
 
+## Initial placement
+
+| Dependency / concept | Observed evidence | Date | Starting-point implication |
+| --- | --- | --- | --- |
+
+## Concept evidence
+
 | Concept | Status | Observed evidence | Date | Next action |
 | --- | --- | --- | --- | --- |
-
-## Unit entry checks
-
-| Unit | Status | Observed evidence | Date | Next action |
-| --- | --- | --- | --- | --- |
 ```
 
-## `curricula/<subject>/verification/index.md`
-
-```markdown
-# <Subject> verification index
-
-| Horizon | Status | Updated | Packet | Claim IDs | Sources / recheck trigger |
-| --- | --- | --- | --- | --- | --- |
-```
-
-Use `pending`, `covered`, `stale`, or `superseded` for status. A pending row is a durable reminder that factual teaching cannot advance for that horizon until a matching packet is saved. Do not add source rows, verification packets, lesson records, or learner evidence until they exist.
-
-## Other indexes
-
-Create the headings and empty tables described by `curriculum-sources` and `lessons/README.md`.
+Do not add learner evidence, lesson records, or source materials until they exist. Create source and lesson indexes only when those materials are needed.

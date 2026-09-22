@@ -1,79 +1,39 @@
 ---
 name: teach
-description: Use when the user wants to learn or deeply understand a topic through a personalized, evidence-aware lesson rather than receive a one-shot explanation.
+description: Use when the user wants a personalized lesson or sustained help understanding a topic, rather than a one-shot answer.
 ---
 
-# Teach for understanding
+# Teach
 
-Help the learner build a small connected model they can derive from, not a pile of facts to memorize. Use this workflow for a full lesson or scale it down for a short explanation.
+Teach toward an outcome the learner can explain, decide, build, or calculate. Give a short answer directly when that is what they want; scale this workflow to a lesson when they want to learn.
 
-## Customize This Skill First
+## Set up the learner
 
-This section is intentionally yours to edit. Keep the rest as the teaching engine.
+Before substantial teaching, read `learner-profile.md`. If its setup is incomplete or required fields are placeholders, ask a short set of questions to fill it, save the answers, and set its status to `COMPLETE`. Store durable, cross-subject preferences and needs there. Do not repeatedly ask for information already recorded.
 
-- **Default pace:** Ask one question or establish one meaningful idea at a time.
-- **Default depth:** Explain the mechanism, then use one concrete example.
-- **Examples I enjoy:** Replace this with domains, analogies, or projects that make ideas feel familiar.
-- **Feedback style:** Be candid, specific, and kind. Say what is right, what needs correction, and why.
-- **When I am low energy:** Prefer a concise expository explanation before asking a check question.
+When the learner states a durable cross-subject preference or need later, update `learner-profile.md` immediately and acknowledge it briefly. Curriculum-specific preferences and reported gaps belong in that curriculum's `learner-notes.md`.
 
-## Teaching principles
+For one-off teaching, clarify the desired outcome and diagnose only enough to choose a starting point. For an active curriculum, use `curriculum` for subject context and records.
 
-1. **Start from secure ground.** Find a few simple truths or real definitions the learner can safely accept. Do not present a caveated claim as a foundation.
-2. **Make each step discoverable.** Introduce every new idea by the problem it solves or the observation that motivates it. Explain why someone would reach for this step.
-3. **Make the connection explicit.** State what established idea the new idea depends on; do not let a fact appear from nowhere.
-4. **Verify important claims.** Follow the active curriculum's `verification` policy. It may require the named `lesson-researcher` for uncertain, time-sensitive, disputed, foundational, or source-dependent claims. Otherwise use web research as needed. Correct the record openly if research changes the lesson.
+## Teach and check
 
-## Session protocol
+For a substantial lesson, preview a short route and let the learner change it before teaching. Build from what is established. For each meaningful idea, state the problem it solves, explain or model it, give a concrete example, connect it to earlier ideas, then use a short check. Give immediate, specific feedback and repair any gap before relying on it. Do not use discovery-first or quiz on material not yet taught unless the learner explicitly asks to be questioned first.
 
-### 1. Probe
+Adapt pace, depth, examples, checks, and feedback to the learner profile and their current energy. State the next useful step when a lesson ends.
 
-- When an active curriculum supplies a **UNIT ENTRY GATE** with status **required** or **recheck-required**, begin with its focused probe before planning or teaching the selected unit. Keep it limited to the immediate prerequisites and essential starting model; do not rerun a broad diagnostic or repeat this phase on every continued lesson in the same completed unit.
-- Ask what outcome the learner wants: what they want to be able to explain, decide, build, or calculate.
-- Locate the relevant edge of their knowledge with short, gradable questions. Test prerequisites actually needed for the goal, not a broad survey of the field.
-- A correct answer establishes a floor, not mastery. Increase difficulty or test an adjacent prerequisite until the useful boundary is clear.
-- Treat a wrong answer as diagnostic: distinguish a slip from a missing link or a stable misconception before teaching over it.
-- Use ordinary chat for both preference questions and graded checks. Label a check clearly, then give immediate feedback: result, correct reasoning, and what it changes in the lesson.
-- After an entry probe, update the unit-entry record through `curriculum` before presenting the unit plan. If the boundary is not usable, repair it and retain **recheck-required** until observed evidence supports **completed**.
+## Verify factual teaching
 
-### 2. Plan
+This skill owns factual verification. Before teaching a coherent section with new factual claims, batch-check the claims against relevant primary or authoritative sources. A batch may cover several teaching turns; refresh it when the topic or source changes. With an active curriculum, use applicable course sources first. Use `lesson-researcher` for source-heavy curriculum material, conflicting sources, or research that would otherwise interrupt the lesson.
 
-- Identify candidate claims that may need verification, but do not dispatch research for the teaching horizon until the learner approves the route. Research only what is necessary to make the plan itself accurate.
-- Identify the smallest dependency chain from what the learner already knows to the requested outcome.
-- Choose Socratic discovery when the learner can plausibly reason to the next step; otherwise explain the discovery path directly.
-- Present a short plan before teaching: the destination, the order, and why that order fits their current level.
-- Use a short dependency list unless a rendered visual would materially clarify the plan. Wait for the learner's approval before a substantial lesson.
+Research is unnecessary for transparent derivations, calculations, and feedback on the learner's own work. Do not require packets, claim IDs, verification indexes, or a per-response verification gate. Correct the lesson plainly if research changes a claim.
 
-### 3. Verify the teaching horizon
+## Artifacts and records
 
-After the learner approves the plan and before new factual lesson content, privately outline the exact material claims for a small coherent teaching horizon. The research batch may cover several bite-sized teach/check turns; it is not a promise to send all of that material in one response.
-
-Apply the active curriculum's verification mode:
-
-- **off** — research is optional. Do not create a verification burden for pure derivation, arithmetic, or other self-contained reasoning.
-- **adaptive** — verify claims the subject policy marks as required, plus claims that are uncertain, time-sensitive, disputed, foundational, or source-dependent. This is the safe default for factual or source-dependent curricula when no mode is specified.
-- **strict** — verify every material factual claim. Before sending each factual response, map every such claim to a packet claim ID. Send disputed or high-stakes material to the researcher for an after-draft check before teaching it.
-
-For claims that need verification, use `curriculum` to resolve the current **VERIFICATION GATE** before invoking the named `lesson-researcher`. If it is **missing** or **stale**, first record or refresh the matching `pending` index row, then invoke the researcher with the subject, exact claims, horizon, relevant source IDs, and explicit out-of-scope boundaries. Ask it to return a compact packet; do not ask it to teach or write files. Wait for the first packet before introducing its factual content. Persist the returned packet under `curricula/<subject>/verification/`, then update the matching row to **covered**. A claim is usable only when its meaning and context still match a supported packet claim and its source version or fingerprint still matches. For time-sensitive claims, also check the packet's freshness or recheck trigger.
-
-Before each factual response, resolve the verification gate again. **covered** or **not-required** is required to advance into new factual content. With **missing**, **pending**, or **stale**, do not teach the next factual node—even if the learner asks to continue. You may probe, grade a learner answer, correct an error using already-established context, summarize their stated model, or explain that verification is in progress; do not introduce a new factual bridge. Be candid that verification improves trust but is not infallible.
-
-When the remaining packet buffer is nearly exhausted and the next node is predictable, create its pending gate row and reuse the same researcher thread to refill the next horizon in the background when the harness supports background subagents. You may ask or grade checks while it runs, but do not advance into new factual content until its packet is ready and its gate is **covered**. Once it completes, persist its result and update the matching pending row before relying on it. If background work is unavailable, refill synchronously. Never run competing researchers for one lesson.
-
-If the learner changes direction, stop relying on packets outside the new scope. Keep still-valid packets indexed for later reuse, then verify the new horizon.
-
-### 4. Teach
-
-For each non-trivial node in the plan:
-
-1. Motivate the gap or problem it resolves.
-2. Establish the idea from a secure foundation or a discoverable step.
-3. Connect it explicitly to prior nodes.
-4. Run one short check. If it does not land, repair this node before building on it.
+If the learner asks for a visual or interactive exercise, create the smallest useful local artifact and present it with the available harness tools. For a curriculum, retain useful artifacts and write a concise lesson record; for one-off work, retain one only on request.
 
 ## Mathematics formatting
 
-Do not use `$...$` for inline mathematics: in the Codex app it may be displayed literally. For a variable named in a sentence, use plain text or backticks, such as `y` or `w`. For an expression, equation, or notation that benefits from typesetting, use a display block with `$$` delimiters on their own lines:
+Do not use `$...$` for inline mathematics: the Codex app may display it literally. Use plain text or backticks for a variable in prose. Put expressions that benefit from typesetting in a display block:
 
 ```markdown
 $$
@@ -81,16 +41,4 @@ $$
 $$
 ```
 
-Keep notation defined and connect each symbol to the concept it represents.
-
-## Visuals and records
-
-- Invoke `lesson-visuals` only when a relationship, process, geometry, or comparison is materially clearer as a picture.
-- For an active curriculum, save every meaningful lesson as a compact durable record and link any rendered artifacts according to `lessons/README.md`. For a one-off topic, create a record only when the learner asks. Do not create a lesson file merely because a casual question was asked.
-- End a completed lesson with the learner's current model, corrections made, and the next useful frontier.
-
-## Optional curriculum context
-
-When a curriculum is active, use `curriculum` to load its subject policy and evidence ledger before probing. Treat that context as a scope modifier: it selects relevant prerequisites, identifies stale or partial knowledge, and can require subject-specific checks. It never replaces this skill's core probe → plan → teach process.
-
-Do not create or redesign a curriculum during a teaching task unless the learner explicitly asks for `curriculum-designer`. The teacher does not catalog sources, build roadmaps, or run setup workflows on its own.
+Define notation when it is introduced.
