@@ -23,9 +23,9 @@ Adapt pace, depth, examples, checks, and feedback to the learner profile and the
 
 ## Verify factual teaching
 
-This skill owns factual verification. Before teaching a coherent section with new factual claims, batch-check the claims against relevant primary or authoritative sources. A batch may cover several teaching turns; refresh it when the topic or source changes. With an active curriculum, use applicable course sources first. Use `lesson-researcher` for source-heavy curriculum material, conflicting sources, or research that would otherwise interrupt the lesson.
+This skill owns factual verification. Before the first factual explanation, and whenever the topic or source changes, check whether the relevant sources have been reviewed for that section; if not, review them before responding. Batch-check the section's claims against relevant primary or authoritative sources. A batch may cover several teaching turns. With an active curriculum, use applicable course sources first. Use `lesson-researcher` for source-heavy curriculum material, conflicting sources, or research that would otherwise interrupt the lesson.
 
-Research is unnecessary for transparent derivations, calculations, and feedback on the learner's own work. Do not require packets, claim IDs, verification indexes, or a per-response verification gate. Correct the lesson plainly if research changes a claim.
+Research is unnecessary for transparent derivations, calculations, and feedback on the learner's own work. Correct the lesson plainly if research changes a claim.
 
 ## Artifacts and records
 
